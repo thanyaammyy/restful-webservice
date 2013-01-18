@@ -1,0 +1,120 @@
+﻿body {
+    padding: 5 0 0 0;
+	margin: 0px; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	font-size: 12pt;  
+	background-color:#ffffff;
+}
+A:link {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #ba9963;
+	text-decoration: none;
+}
+A:visited {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #d3b380;
+	text-decoration: none;
+}
+A:active {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #ba9963;
+	text-decoration: underline;
+}
+A:hover {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #3d3d3d;
+	text-decoration: underline;
+}
+TABLE {
+	font-size: 10pt; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	line-height: 15px; 
+}
+INPUT {
+    font-size: 10pt;
+    font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+    color: #3d3d3d;
+}
+TEXTAREA {
+	font-size: 10pt;
+    font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+    color: #3d3d3d;
+}
+SELECT {
+	font-size: 10pt;
+    font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+    color: #3d3d3d;
+}
+.clsRadio {
+	border-right: medium none; 
+	border-top: medium none; 
+	border-left: medium none; 
+	border-bottom: medium none; 
+}
+.clsCheck {
+	border-right: medium none; 
+	border-top: medium none; 
+	border-left: medium none; 
+	border-bottom: medium none;  
+}
+.clsButton {
+	border-right: 1px solid; 
+	border-top: 1px solid; 
+	border-left: 1px solid; 
+	border-bottom: 1px solid; 
+	border-color: #455a79; 
+	font-weight: bold; 
+	font-size: 10pt; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	background-color: #486c9f; 
+	color: #b9b9b9;
+}
+.TextBlack12 {
+	font-size: 10pt; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	line-height: 15px; 
+	color: #ba9963;
+    white-space: nowrap;
+}
+.Texthead {
+	font-size: 12pt; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	line-height: 15px; 
+	color: #ba9963;
+}
+.asteric {
+    color: #ba9963;
+}
+.redText {
+    color: red;
+}
+#copyright {
+text-align: right;
+padding: 10px;
+font-size: 11px;
+color: #727272;
+    padding-top: 20px;
+}
+.headerMenuLabel {
+    font-size: 15pt; 
+	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+	line-height: 15px; 
+	color: #6c4505;
+	padding-bottom: 30px
+}
+.occupied {
+    background-color:thistle
+}
+span.cellWithoutBackground
+{
+    display:block;
+    background-image:none;
+    margin-right:-2px;
+    margin-left:-2px;
+    height:14px;
+    padding:4px;
+}

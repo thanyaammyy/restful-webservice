@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Medallia" Class="MedalliaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=61.90.202.70;Initial Catalog=Medallia;Persist Security Info=True;User ID=medallia" SettingsObjectName="DataModelLib.Properties.Settings" SettingsPropertyName="MedalliaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbdata_medallia" Member="tbdata_medallias">
+    <Type Name="tbdata_medallia">
+      <Column Name="DataID" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DataDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HotelCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="alldata" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Hv_email" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Not_email" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Hv_add1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Medallia" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBDAT" Member="TBDATs">
+    <Type Name="TBDAT">
+      <Column Name="MedalID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PROPERTYCODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ROOMNUMBER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TITLE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GUESTLASTNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GUESTFIRSTNAME" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CHECKINDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CHECKOUTDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS3" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS4" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="POST_CODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="STATE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADDRESS_TYPE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CITY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COUNTRY" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ROOMRATE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RESERVATIONNO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ROOMTYPE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RATECODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RATEVALUE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOYALTYPROGRAMMENO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LOYALTYPROGRAMMESTATUS" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CUSTOMERTYPE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MARKETSEGMENTCODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SOURCECODE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COMPANYNAME" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="TOTALROOMREV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TOTALF_BREV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TOTALEXTRAREV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TOTALREV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbISO" Member="tbISOs">
+    <Type Name="tbISO">
+      <Column Name="CountryID" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CountryName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ISO3" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ISO2" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="AAB" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ABB" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ACP" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="AOP" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="AEC" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="APS" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ARC" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="AVK" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="AWB" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

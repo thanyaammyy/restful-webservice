@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Webservice">
+  <DataContextMoniker Name="/WebserviceDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5ec59429-b5e7-4f97-8e0e-123742074710" absoluteBounds="4.625, 1.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/WebserviceDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e21f3909-4387-4c51-ab24-7f9a4873b3c2" absoluteBounds="4.64, 2.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="766050eb-d9b5-4932-9ee7-517945b82114" absoluteBounds="7.625, 4.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WebserviceDataContext/Property" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe370a5e-9d45-418b-96ca-eb6232b839a1" absoluteBounds="7.6400000000000006, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9b8bd60d-c428-43e1-8988-59446df922e7" absoluteBounds="1.75, 4.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/WebserviceDataContext/Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="24f0d99e-ae28-4973-b465-9f7ddb6e0ca6" absoluteBounds="1.7650000000000001, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.625 : 2.95274983723958); (8.625 : 2.95274983723958); (8.625 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WebserviceDataContext/User/User_Property" />
+      <nodes>
+        <classShapeMoniker Id="5ec59429-b5e7-4f97-8e0e-123742074710" />
+        <classShapeMoniker Id="766050eb-d9b5-4932-9ee7-517945b82114" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.95274983723958); (2.75 : 2.95274983723958); (2.75 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/WebserviceDataContext/User/User_Department" />
+      <nodes>
+        <classShapeMoniker Id="5ec59429-b5e7-4f97-8e0e-123742074710" />
+        <classShapeMoniker Id="9b8bd60d-c428-43e1-8988-59446df922e7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
