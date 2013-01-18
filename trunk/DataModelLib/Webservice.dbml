@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WebService" Class="WebserviceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=SHQDSPS1\ONCOMOSQL;Initial Catalog=WebService;Persist Security Info=True;User ID=webservice" SettingsObjectName="DataModelLib.Properties.Settings" SettingsPropertyName="WebServiceConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PropertyCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Association Name="User_Property" Member="Properties" ThisKey="PropertyCode" OtherKey="PropertyCode" Type="Property" />
-      <Association Name="User_Department" Member="Departments" ThisKey="DepartmentCode" OtherKey="DepartmentCode" Type="Department" />
-    </Type>
-  </Table>
   <Table Name="dbo.Property" Member="Properties">
     <Type Name="Property">
       <Column Name="PropertyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -27,6 +14,20 @@
       <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="User_Department" Member="User" ThisKey="DepartmentCode" OtherKey="DepartmentCode" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PropertyCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Department" Member="Departments" ThisKey="DepartmentCode" OtherKey="DepartmentCode" Type="Department" />
+      <Association Name="User_Property" Member="Properties" ThisKey="PropertyCode" OtherKey="PropertyCode" Type="Property" />
     </Type>
   </Table>
 </Database>
