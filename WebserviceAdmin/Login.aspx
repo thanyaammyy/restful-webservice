@@ -42,7 +42,7 @@
     </asp:ScriptManager>
     <asp:UpdatePanel ID="updateTeamPanel" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
-            <table width="450px" border="0" bgcolor="rgb(0, 51, 102)" cellspacing="3" cellpadding="3" align="center" 
+            <table width="450px" border="0" bgcolor="#003366" cellspacing="3" cellpadding="3" align="center" 
             style="margin-top:-3em; margin-left: -4em; left: 40%; top:30%;position:absolute; padding-bottom: 20px">
                 <tr>
                     <td colspan="2" style="text-align: center; padding: 15px;">

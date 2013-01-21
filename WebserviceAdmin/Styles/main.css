@@ -24,10 +24,12 @@ A:active {
 	text-decoration: underline;
 }
 A:hover {
-	font-size: 10pt;
+	
+	
+	border: 1px solid #003366;
+	background: #e5e5cc url(images/ui-bg_highlight-hard_75_e5e5cc_1x100.png) 50% 50% repeat-x;
 	font-weight: bold;
-	color: rgb(0, 51, 102);
-	text-decoration: underline;
+	color: #003366;
 }
 TABLE {
 	font-size: 10pt; 
@@ -99,14 +101,13 @@ SELECT {
     text-align: right;
     padding-top: 20px;
     padding-right: 5px;
-    width: auto;
+    width: 98%;
     color: #ffffff;
     padding-bottom: 3;
     padding-left: 15;
     font-family: Verdana;
     font-style: italic;
     font-size: 12px;
-    margin-top: 0px;
     margin-bottom: 0px;
     margin-left: 10px;
     margin-right: 10px;
@@ -114,12 +115,20 @@ SELECT {
     border-top-color: #336699;
     border-top-width: 6px;
     border-top-style: solid;
+    
+    clear: both;
+    position: fixed !important;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+    bottom:0;
 }
 .headerMenuLabel {
-    font-size: 15pt; 
-	font-family: Tahoma, Verdana, Arial, helvetica, sans-serif; 
+    font-size: 22px; 
+	font-family: Verdana;
+    font-weight: bold;
 	line-height: 15px; 
-	color: #6c4505;
+	color: rgb(0, 51, 102);
 	padding-bottom: 30px
 }
 .occupied {
@@ -150,4 +159,37 @@ span.cellWithoutBackground
     border-bottom-color: #336699;
     border-bottom-width: 6px;
     border-bottom-style: solid;
+}
+.menu:link 
+{
+    font-size: 10pt;
+	font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.menu:hover 
+{
+    font-size: 10pt;
+	font-weight: bold;
+    color: #003366;
+    text-decoration: underline;
+}
+
+.menu:visited {
+	font-size: 10pt;
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+.menu:active {
+	font-size: 10pt;
+	font-weight: bold;
+	color: white;
+	text-decoration: underline;
+}
+.menu:hover:visited {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #003366;
+	text-decoration: none;
 }

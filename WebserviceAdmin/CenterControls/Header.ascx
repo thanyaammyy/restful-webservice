@@ -12,9 +12,9 @@
         </div>
     </div>
     <div id="divAdmin" style="padding: 20px; text-align: center">
-        <a href="" style="color: white">Reposiotry</a> <span style="color: white; padding: 2px">l</span> 
-        <a href="" style="color: white">User Management</a> <span style="color: white; padding: 2px">l</span> 
-        <a href="" style="color: white">Property Management</a><span style="color: white; padding: 2px">l</span> 
-        <a href="" style="color: white">Department Management</a>
+        <a href="../Repository.aspx" class="menu" >Repository</a> <span style="color: white; padding: 2px">l</span> 
+        <a href="../Users.aspx" class="menu" >User Management</a> <span style="color: white; padding: 2px">l</span> 
+        <a href="../Property.aspx" class="menu" >Property Management</a><span style="color: white; padding: 2px">l</span> 
+        <a href="../Department.aspx" class="menu" >Department Management</a>
     </div>
 </div>
