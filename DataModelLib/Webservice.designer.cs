@@ -108,7 +108,7 @@ namespace DataModelLib
 		
 		private string _PropertyName;
 		
-		private EntityRef<User> _User;
+		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -124,7 +124,7 @@ namespace DataModelLib
 		
 		public Property()
 		{
-			this._User = default(EntityRef<User>);
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -159,10 +159,6 @@ namespace DataModelLib
 			{
 				if ((this._PropertyCode != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnPropertyCodeChanging(value);
 					this.SendPropertyChanging();
 					this._PropertyCode = value;
@@ -192,37 +188,16 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Property", Storage="_User", ThisKey="PropertyCode", OtherKey="PropertyCode", IsForeignKey=true)]
-		public User User
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Property_User", Storage="_Users", ThisKey="PropertyId", OtherKey="PropertyId")]
+		public EntitySet<User> Users
 		{
 			get
 			{
-				return this._User.Entity;
+				return this._Users;
 			}
 			set
 			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Properties.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Properties.Add(this);
-						this._PropertyCode = value.PropertyCode;
-					}
-					else
-					{
-						this._PropertyCode = default(string);
-					}
-					this.SendPropertyChanged("User");
-				}
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -245,6 +220,18 @@ namespace DataModelLib
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Property = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Property = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Department")]
@@ -259,7 +246,7 @@ namespace DataModelLib
 		
 		private string _DepartmentName;
 		
-		private EntityRef<User> _User;
+		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -275,7 +262,7 @@ namespace DataModelLib
 		
 		public Department()
 		{
-			this._User = default(EntityRef<User>);
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -310,10 +297,6 @@ namespace DataModelLib
 			{
 				if ((this._DepartmentCode != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnDepartmentCodeChanging(value);
 					this.SendPropertyChanging();
 					this._DepartmentCode = value;
@@ -343,37 +326,16 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Department", Storage="_User", ThisKey="DepartmentCode", OtherKey="DepartmentCode", IsForeignKey=true)]
-		public User User
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_User", Storage="_Users", ThisKey="DepartmentId", OtherKey="UserId")]
+		public EntitySet<User> Users
 		{
 			get
 			{
-				return this._User.Entity;
+				return this._Users;
 			}
 			set
 			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Departments.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Departments.Add(this);
-						this._DepartmentCode = value.DepartmentCode;
-					}
-					else
-					{
-						this._DepartmentCode = default(string);
-					}
-					this.SendPropertyChanged("User");
-				}
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -396,6 +358,18 @@ namespace DataModelLib
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
@@ -410,9 +384,9 @@ namespace DataModelLib
 		
 		private string _Password;
 		
-		private string _PropertyCode;
+		private int _PropertyId;
 		
-		private string _DepartmentCode;
+		private int _DepartmentId;
 		
 		private string _IP;
 		
@@ -420,9 +394,11 @@ namespace DataModelLib
 		
 		private System.Nullable<int> _Status;
 		
-		private EntitySet<Department> _Departments;
+		private string _UpdateUser;
 		
-		private EntitySet<Property> _Properties;
+		private EntityRef<Property> _Property;
+		
+		private EntityRef<Department> _Department;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -434,22 +410,24 @@ namespace DataModelLib
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnPropertyCodeChanging(string value);
-    partial void OnPropertyCodeChanged();
-    partial void OnDepartmentCodeChanging(string value);
-    partial void OnDepartmentCodeChanged();
+    partial void OnPropertyIdChanging(int value);
+    partial void OnPropertyIdChanged();
+    partial void OnDepartmentIdChanging(int value);
+    partial void OnDepartmentIdChanged();
     partial void OnIPChanging(string value);
     partial void OnIPChanged();
     partial void OnUpdateDateTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnUpdateDateTimeChanged();
     partial void OnStatusChanging(System.Nullable<int> value);
     partial void OnStatusChanged();
+    partial void OnUpdateUserChanging(string value);
+    partial void OnUpdateUserChanged();
     #endregion
 		
 		public User()
 		{
-			this._Departments = new EntitySet<Department>(new Action<Department>(this.attach_Departments), new Action<Department>(this.detach_Departments));
-			this._Properties = new EntitySet<Property>(new Action<Property>(this.attach_Properties), new Action<Property>(this.detach_Properties));
+			this._Property = default(EntityRef<Property>);
+			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
 		
@@ -464,6 +442,10 @@ namespace DataModelLib
 			{
 				if ((this._UserId != value))
 				{
+					if (this._Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnUserIdChanging(value);
 					this.SendPropertyChanging();
 					this._UserId = value;
@@ -513,42 +495,46 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyCode", DbType="NVarChar(10)")]
-		public string PropertyCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyId", DbType="Int NOT NULL")]
+		public int PropertyId
 		{
 			get
 			{
-				return this._PropertyCode;
+				return this._PropertyId;
 			}
 			set
 			{
-				if ((this._PropertyCode != value))
+				if ((this._PropertyId != value))
 				{
-					this.OnPropertyCodeChanging(value);
+					if (this._Property.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPropertyIdChanging(value);
 					this.SendPropertyChanging();
-					this._PropertyCode = value;
-					this.SendPropertyChanged("PropertyCode");
-					this.OnPropertyCodeChanged();
+					this._PropertyId = value;
+					this.SendPropertyChanged("PropertyId");
+					this.OnPropertyIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentCode", DbType="NVarChar(20)")]
-		public string DepartmentCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentId", DbType="Int NOT NULL")]
+		public int DepartmentId
 		{
 			get
 			{
-				return this._DepartmentCode;
+				return this._DepartmentId;
 			}
 			set
 			{
-				if ((this._DepartmentCode != value))
+				if ((this._DepartmentId != value))
 				{
-					this.OnDepartmentCodeChanging(value);
+					this.OnDepartmentIdChanging(value);
 					this.SendPropertyChanging();
-					this._DepartmentCode = value;
-					this.SendPropertyChanged("DepartmentCode");
-					this.OnDepartmentCodeChanged();
+					this._DepartmentId = value;
+					this.SendPropertyChanged("DepartmentId");
+					this.OnDepartmentIdChanged();
 				}
 			}
 		}
@@ -613,29 +599,91 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Department", Storage="_Departments", ThisKey="DepartmentCode", OtherKey="DepartmentCode")]
-		public EntitySet<Department> Departments
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUser", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UpdateUser
 		{
 			get
 			{
-				return this._Departments;
+				return this._UpdateUser;
 			}
 			set
 			{
-				this._Departments.Assign(value);
+				if ((this._UpdateUser != value))
+				{
+					this.OnUpdateUserChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateUser = value;
+					this.SendPropertyChanged("UpdateUser");
+					this.OnUpdateUserChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Property", Storage="_Properties", ThisKey="PropertyCode", OtherKey="PropertyCode")]
-		public EntitySet<Property> Properties
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Property_User", Storage="_Property", ThisKey="PropertyId", OtherKey="PropertyId", IsForeignKey=true)]
+		public Property Property
 		{
 			get
 			{
-				return this._Properties;
+				return this._Property.Entity;
 			}
 			set
 			{
-				this._Properties.Assign(value);
+				Property previousValue = this._Property.Entity;
+				if (((previousValue != value) 
+							|| (this._Property.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Property.Entity = null;
+						previousValue.Users.Remove(this);
+					}
+					this._Property.Entity = value;
+					if ((value != null))
+					{
+						value.Users.Add(this);
+						this._PropertyId = value.PropertyId;
+					}
+					else
+					{
+						this._PropertyId = default(int);
+					}
+					this.SendPropertyChanged("Property");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_User", Storage="_Department", ThisKey="UserId", OtherKey="DepartmentId", IsForeignKey=true)]
+		public Department Department
+		{
+			get
+			{
+				return this._Department.Entity;
+			}
+			set
+			{
+				Department previousValue = this._Department.Entity;
+				if (((previousValue != value) 
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Department.Entity = null;
+						previousValue.Users.Remove(this);
+					}
+					this._Department.Entity = value;
+					if ((value != null))
+					{
+						value.Users.Add(this);
+						this._UserId = value.DepartmentId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("Department");
+				}
 			}
 		}
 		
@@ -657,30 +705,6 @@ namespace DataModelLib
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Departments(Department entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Departments(Department entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-		
-		private void attach_Properties(Property entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_Properties(Property entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 	}
 }

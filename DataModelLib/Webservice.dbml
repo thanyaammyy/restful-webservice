@@ -5,7 +5,7 @@
       <Column Name="PropertyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PropertyCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="PropertyName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="User_Property" Member="User" ThisKey="PropertyCode" OtherKey="PropertyCode" Type="User" IsForeignKey="true" />
+      <Association Name="Property_User" Member="Users" ThisKey="PropertyId" OtherKey="PropertyId" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.Department" Member="Departments">
@@ -13,7 +13,7 @@
       <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="User_Department" Member="User" ThisKey="DepartmentCode" OtherKey="DepartmentCode" Type="User" IsForeignKey="true" />
+      <Association Name="Department_User" Member="Users" ThisKey="DepartmentId" OtherKey="UserId" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="Users">
@@ -21,13 +21,14 @@
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PropertyCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PropertyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="User_Department" Member="Departments" ThisKey="DepartmentCode" OtherKey="DepartmentCode" Type="Department" />
-      <Association Name="User_Property" Member="Properties" ThisKey="PropertyCode" OtherKey="PropertyCode" Type="Property" />
+      <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Property_User" Member="Property" ThisKey="PropertyId" OtherKey="PropertyId" Type="Property" IsForeignKey="true" />
+      <Association Name="Department_User" Member="Department" ThisKey="UserId" OtherKey="DepartmentId" Type="Department" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
