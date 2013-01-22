@@ -20,8 +20,8 @@ namespace WebserviceAdmin
 
         private void JqgridDeptBinding()
         {
-            var companyList = DepartmentHelper.ListDepartment();
-            JqgridDept.DataSource = companyList;
+            var departments = DepartmentHelper.ListDepartment();
+            JqgridDept.DataSource = departments;
             JqgridDept.DataBind();
         }
 

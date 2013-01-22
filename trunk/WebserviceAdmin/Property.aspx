@@ -33,7 +33,7 @@
                         </EditClientSideValidators>
                     </cc1:JQGridColumn>
                     <cc1:JQGridColumn HeaderText="Property Name" DataField="PropertyName" Editable="True"
-                        TextAlign="Center" />
+                        TextAlign="Left" />
                 </Columns>
                 <AddDialogSettings CloseAfterAdding="True" />
                 <EditDialogSettings CloseAfterEditing="True" />

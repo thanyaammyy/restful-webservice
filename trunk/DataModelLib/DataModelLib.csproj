@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\Encryption.cs" />
+    <Compile Include="Helper\User.cs" />
     <Compile Include="Medallia.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
