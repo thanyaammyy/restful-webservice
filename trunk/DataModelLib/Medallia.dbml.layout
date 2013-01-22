@@ -8,10 +8,10 @@
         <elementListCompartment Id="b41d602f-8340-41a6-af35-eea05c880874" absoluteBounds="1.6399999999999997, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b884a1cc-f4ec-43fa-9a6b-7af72fde598d" absoluteBounds="4.625, 0.625, 2, 7.1553369140625">
+    <classShape Id="b884a1cc-f4ec-43fa-9a6b-7af72fde598d" absoluteBounds="4.625, 0.625, 2.625, 7.1553369140625">
       <DataClassMoniker Name="/MedalliaDataContext/TBDAT" />
       <nestedChildShapes>
-        <elementListCompartment Id="451e62eb-fad5-4617-84f1-a9fa5e61fe8d" absoluteBounds="4.64, 1.085, 1.9700000000000002, 6.5953369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="451e62eb-fad5-4617-84f1-a9fa5e61fe8d" absoluteBounds="4.64, 1.085, 2.5949999999999998, 6.5953369140625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="dd67a353-ba81-461d-98c8-5917d443e212" absoluteBounds="8.125, 1, 2, 3.3093082682291666">
