@@ -12,6 +12,5 @@
         <li>
             <asp:HyperLink  runat="server" Target="_blank" NavigateUrl="http://localhost:3638/Services/GuestService.svc/help">Guest Service</asp:HyperLink>
         </li>
-    </ul>
-    
+    </ul>    
 </asp:Content>
