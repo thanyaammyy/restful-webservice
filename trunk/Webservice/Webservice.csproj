@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\GuestService.svc" />
     <Content Include="Services\EmailService.svc" />
     <Content Include="Services\RestService.svc" />
     <Content Include="Web.config">
@@ -68,6 +69,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\GuestService.svc.cs">
+      <DependentUpon>GuestService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IGuestService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRestService.cs" />
     <Compile Include="Services\EmailService.svc.cs">

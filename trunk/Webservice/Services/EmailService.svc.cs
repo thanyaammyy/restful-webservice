@@ -14,10 +14,18 @@ namespace Webservice.Services
         {
             var emails = new List<string>();
             var propCode = propertyCodes.Split(',');
-            foreach (var t in propCode)
+            if(propCode[0].ToLower().Equals("all"))
             {
-                emails.AddRange(MedalliaHelper.GetEmail(t));
+                emails.AddRange(MedalliaHelper.GetEmails());
             }
+            else
+            {
+                foreach (var t in propCode)
+                {
+                    emails.AddRange(MedalliaHelper.GetEmailByPropCode(t));
+                }
+            }
+            
             return emails;
         }
     }
