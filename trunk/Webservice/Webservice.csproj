@@ -36,6 +36,8 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Services" />
     <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Selectors" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -53,6 +55,9 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WcfRestContrib">
+      <HintPath>..\packages\wcfrestcontrib.1.7.12.0\lib\WcfRestContrib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Services\GuestService.svc" />
@@ -69,6 +74,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="authentication\CustomUserNameValidator.cs" />
     <Compile Include="Services\GuestService.svc.cs">
       <DependentUpon>GuestService.svc</DependentUpon>
     </Compile>
@@ -92,6 +98,9 @@
       <Name>DataModelLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -99,7 +108,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>3638</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
