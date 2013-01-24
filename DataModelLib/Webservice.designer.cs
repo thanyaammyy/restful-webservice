@@ -30,15 +30,15 @@ namespace DataModelLib
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertProperty(Property instance);
-    partial void UpdateProperty(Property instance);
-    partial void DeleteProperty(Property instance);
-    partial void InsertDepartment(Department instance);
-    partial void UpdateDepartment(Department instance);
-    partial void DeleteDepartment(Department instance);
+    partial void InsertService(Service instance);
+    partial void UpdateService(Service instance);
+    partial void DeleteService(Service instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertUserService(UserService instance);
+    partial void UpdateUserService(UserService instance);
+    partial void DeleteUserService(UserService instance);
     #endregion
 		
 		public WebserviceDataContext() : 
@@ -71,19 +71,11 @@ namespace DataModelLib
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Property> Properties
+		public System.Data.Linq.Table<Service> Services
 		{
 			get
 			{
-				return this.GetTable<Property>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Department> Departments
-		{
-			get
-			{
-				return this.GetTable<Department>();
+				return this.GetTable<Service>();
 			}
 		}
 		
@@ -94,110 +86,207 @@ namespace DataModelLib
 				return this.GetTable<User>();
 			}
 		}
+		
+		public System.Data.Linq.Table<UserService> UserServices
+		{
+			get
+			{
+				return this.GetTable<UserService>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ConsumeLog> ConsumeLogs
+		{
+			get
+			{
+				return this.GetTable<ConsumeLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ErrorLog> ErrorLogs
+		{
+			get
+			{
+				return this.GetTable<ErrorLog>();
+			}
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Property")]
-	public partial class Property : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Service")]
+	public partial class Service : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _PropertyId;
+		private int _ServiceId;
 		
-		private string _PropertyCode;
+		private string _ServiceName;
 		
-		private string _PropertyName;
+		private string _ServiceURL;
 		
-		private EntitySet<User> _Users;
+		private string _UpdateUser;
+		
+		private System.DateTime _UpdateDateTime;
+		
+		private EntityRef<UserService> _UserService;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPropertyIdChanging(int value);
-    partial void OnPropertyIdChanged();
-    partial void OnPropertyCodeChanging(string value);
-    partial void OnPropertyCodeChanged();
-    partial void OnPropertyNameChanging(string value);
-    partial void OnPropertyNameChanged();
+    partial void OnServiceIdChanging(int value);
+    partial void OnServiceIdChanged();
+    partial void OnServiceNameChanging(string value);
+    partial void OnServiceNameChanged();
+    partial void OnServiceURLChanging(string value);
+    partial void OnServiceURLChanged();
+    partial void OnUpdateUserChanging(string value);
+    partial void OnUpdateUserChanged();
+    partial void OnUpdateDateTimeChanging(System.DateTime value);
+    partial void OnUpdateDateTimeChanged();
     #endregion
 		
-		public Property()
+		public Service()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._UserService = default(EntityRef<UserService>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int PropertyId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ServiceId
 		{
 			get
 			{
-				return this._PropertyId;
+				return this._ServiceId;
 			}
 			set
 			{
-				if ((this._PropertyId != value))
+				if ((this._ServiceId != value))
 				{
-					this.OnPropertyIdChanging(value);
+					if (this._UserService.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnServiceIdChanging(value);
 					this.SendPropertyChanging();
-					this._PropertyId = value;
-					this.SendPropertyChanged("PropertyId");
-					this.OnPropertyIdChanged();
+					this._ServiceId = value;
+					this.SendPropertyChanged("ServiceId");
+					this.OnServiceIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyCode", DbType="NVarChar(20)")]
-		public string PropertyCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceName", DbType="NVarChar(50)")]
+		public string ServiceName
 		{
 			get
 			{
-				return this._PropertyCode;
+				return this._ServiceName;
 			}
 			set
 			{
-				if ((this._PropertyCode != value))
+				if ((this._ServiceName != value))
 				{
-					this.OnPropertyCodeChanging(value);
+					this.OnServiceNameChanging(value);
 					this.SendPropertyChanging();
-					this._PropertyCode = value;
-					this.SendPropertyChanged("PropertyCode");
-					this.OnPropertyCodeChanged();
+					this._ServiceName = value;
+					this.SendPropertyChanged("ServiceName");
+					this.OnServiceNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyName", DbType="NVarChar(50)")]
-		public string PropertyName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceURL", DbType="NVarChar(150) NOT NULL", CanBeNull=false)]
+		public string ServiceURL
 		{
 			get
 			{
-				return this._PropertyName;
+				return this._ServiceURL;
 			}
 			set
 			{
-				if ((this._PropertyName != value))
+				if ((this._ServiceURL != value))
 				{
-					this.OnPropertyNameChanging(value);
+					this.OnServiceURLChanging(value);
 					this.SendPropertyChanging();
-					this._PropertyName = value;
-					this.SendPropertyChanged("PropertyName");
-					this.OnPropertyNameChanged();
+					this._ServiceURL = value;
+					this.SendPropertyChanged("ServiceURL");
+					this.OnServiceURLChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Property_User", Storage="_Users", ThisKey="PropertyId", OtherKey="PropertyId")]
-		public EntitySet<User> Users
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUser", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UpdateUser
 		{
 			get
 			{
-				return this._Users;
+				return this._UpdateUser;
 			}
 			set
 			{
-				this._Users.Assign(value);
+				if ((this._UpdateUser != value))
+				{
+					this.OnUpdateUserChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateUser = value;
+					this.SendPropertyChanged("UpdateUser");
+					this.OnUpdateUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date NOT NULL")]
+		public System.DateTime UpdateDateTime
+		{
+			get
+			{
+				return this._UpdateDateTime;
+			}
+			set
+			{
+				if ((this._UpdateDateTime != value))
+				{
+					this.OnUpdateDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateDateTime = value;
+					this.SendPropertyChanged("UpdateDateTime");
+					this.OnUpdateDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_UserService", ThisKey="ServiceId", OtherKey="ServiceId", IsForeignKey=true)]
+		public UserService UserService
+		{
+			get
+			{
+				return this._UserService.Entity;
+			}
+			set
+			{
+				UserService previousValue = this._UserService.Entity;
+				if (((previousValue != value) 
+							|| (this._UserService.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserService.Entity = null;
+						previousValue.Services.Remove(this);
+					}
+					this._UserService.Entity = value;
+					if ((value != null))
+					{
+						value.Services.Add(this);
+						this._ServiceId = value.ServiceId;
+					}
+					else
+					{
+						this._ServiceId = default(int);
+					}
+					this.SendPropertyChanged("UserService");
+				}
 			}
 		}
 		
@@ -220,159 +309,9 @@ namespace DataModelLib
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Property = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Property = null;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Department")]
-	public partial class Department : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DepartmentId;
-		
-		private string _DepartmentCode;
-		
-		private string _DepartmentName;
-		
-		private EntitySet<User> _Users;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDepartmentIdChanging(int value);
-    partial void OnDepartmentIdChanged();
-    partial void OnDepartmentCodeChanging(string value);
-    partial void OnDepartmentCodeChanged();
-    partial void OnDepartmentNameChanging(string value);
-    partial void OnDepartmentNameChanged();
-    #endregion
-		
-		public Department()
-		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DepartmentId
-		{
-			get
-			{
-				return this._DepartmentId;
-			}
-			set
-			{
-				if ((this._DepartmentId != value))
-				{
-					this.OnDepartmentIdChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentId = value;
-					this.SendPropertyChanged("DepartmentId");
-					this.OnDepartmentIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentCode", DbType="NVarChar(20)")]
-		public string DepartmentCode
-		{
-			get
-			{
-				return this._DepartmentCode;
-			}
-			set
-			{
-				if ((this._DepartmentCode != value))
-				{
-					this.OnDepartmentCodeChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentCode = value;
-					this.SendPropertyChanged("DepartmentCode");
-					this.OnDepartmentCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentName", DbType="NVarChar(50)")]
-		public string DepartmentName
-		{
-			get
-			{
-				return this._DepartmentName;
-			}
-			set
-			{
-				if ((this._DepartmentName != value))
-				{
-					this.OnDepartmentNameChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentName = value;
-					this.SendPropertyChanged("DepartmentName");
-					this.OnDepartmentNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_User", Storage="_Users", ThisKey="DepartmentId", OtherKey="UserId")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.Department = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -384,21 +323,13 @@ namespace DataModelLib
 		
 		private string _Password;
 		
-		private int _PropertyId;
-		
-		private int _DepartmentId;
-		
-		private string _IP;
-		
-		private System.Nullable<System.DateTime> _UpdateDateTime;
-		
-		private System.Nullable<int> _Status;
+		private string _Description;
 		
 		private string _UpdateUser;
 		
-		private EntityRef<Property> _Property;
+		private System.DateTime _UpdateDateTime;
 		
-		private EntityRef<Department> _Department;
+		private EntityRef<UserService> _UserService;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -410,24 +341,17 @@ namespace DataModelLib
     partial void OnUsernameChanged();
     partial void OnPasswordChanging(string value);
     partial void OnPasswordChanged();
-    partial void OnPropertyIdChanging(int value);
-    partial void OnPropertyIdChanged();
-    partial void OnDepartmentIdChanging(int value);
-    partial void OnDepartmentIdChanged();
-    partial void OnIPChanging(string value);
-    partial void OnIPChanged();
-    partial void OnUpdateDateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdateDateTimeChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
     partial void OnUpdateUserChanging(string value);
     partial void OnUpdateUserChanged();
+    partial void OnUpdateDateTimeChanging(System.DateTime value);
+    partial void OnUpdateDateTimeChanged();
     #endregion
 		
 		public User()
 		{
-			this._Property = default(EntityRef<Property>);
-			this._Department = default(EntityRef<Department>);
+			this._UserService = default(EntityRef<UserService>);
 			OnCreated();
 		}
 		
@@ -442,7 +366,7 @@ namespace DataModelLib
 			{
 				if ((this._UserId != value))
 				{
-					if (this._Department.HasLoadedOrAssignedValue)
+					if (this._UserService.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -455,7 +379,7 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Username
 		{
 			get
@@ -475,7 +399,7 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string Password
 		{
 			get
@@ -495,72 +419,48 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyId", DbType="Int NOT NULL")]
-		public int PropertyId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(150)")]
+		public string Description
 		{
 			get
 			{
-				return this._PropertyId;
+				return this._Description;
 			}
 			set
 			{
-				if ((this._PropertyId != value))
+				if ((this._Description != value))
 				{
-					if (this._Property.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPropertyIdChanging(value);
+					this.OnDescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._PropertyId = value;
-					this.SendPropertyChanged("PropertyId");
-					this.OnPropertyIdChanged();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentId", DbType="Int NOT NULL")]
-		public int DepartmentId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUser", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UpdateUser
 		{
 			get
 			{
-				return this._DepartmentId;
+				return this._UpdateUser;
 			}
 			set
 			{
-				if ((this._DepartmentId != value))
+				if ((this._UpdateUser != value))
 				{
-					this.OnDepartmentIdChanging(value);
+					this.OnUpdateUserChanging(value);
 					this.SendPropertyChanging();
-					this._DepartmentId = value;
-					this.SendPropertyChanged("DepartmentId");
-					this.OnDepartmentIdChanged();
+					this._UpdateUser = value;
+					this.SendPropertyChanged("UpdateUser");
+					this.OnUpdateUserChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IP", DbType="NVarChar(50)")]
-		public string IP
-		{
-			get
-			{
-				return this._IP;
-			}
-			set
-			{
-				if ((this._IP != value))
-				{
-					this.OnIPChanging(value);
-					this.SendPropertyChanging();
-					this._IP = value;
-					this.SendPropertyChanged("IP");
-					this.OnIPChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date")]
-		public System.Nullable<System.DateTime> UpdateDateTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date NOT NULL")]
+		public System.DateTime UpdateDateTime
 		{
 			get
 			{
@@ -575,6 +475,168 @@ namespace DataModelLib
 					this._UpdateDateTime = value;
 					this.SendPropertyChanged("UpdateDateTime");
 					this.OnUpdateDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_UserService", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public UserService UserService
+		{
+			get
+			{
+				return this._UserService.Entity;
+			}
+			set
+			{
+				UserService previousValue = this._UserService.Entity;
+				if (((previousValue != value) 
+							|| (this._UserService.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserService.Entity = null;
+						previousValue.Users.Remove(this);
+					}
+					this._UserService.Entity = value;
+					if ((value != null))
+					{
+						value.Users.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("UserService");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserService")]
+	public partial class UserService : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _UserId;
+		
+		private int _ServiceId;
+		
+		private System.Nullable<int> _Status;
+		
+		private string _UpdateUser;
+		
+		private System.DateTime _UpdateDateTime;
+		
+		private EntitySet<User> _Users;
+		
+		private EntitySet<Service> _Services;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnServiceIdChanging(int value);
+    partial void OnServiceIdChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnUpdateUserChanging(string value);
+    partial void OnUpdateUserChanged();
+    partial void OnUpdateDateTimeChanging(System.DateTime value);
+    partial void OnUpdateDateTimeChanged();
+    #endregion
+		
+		public UserService()
+		{
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceId", DbType="Int NOT NULL")]
+		public int ServiceId
+		{
+			get
+			{
+				return this._ServiceId;
+			}
+			set
+			{
+				if ((this._ServiceId != value))
+				{
+					this.OnServiceIdChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceId = value;
+					this.SendPropertyChanged("ServiceId");
+					this.OnServiceIdChanged();
 				}
 			}
 		}
@@ -619,71 +681,49 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Property_User", Storage="_Property", ThisKey="PropertyId", OtherKey="PropertyId", IsForeignKey=true)]
-		public Property Property
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date NOT NULL")]
+		public System.DateTime UpdateDateTime
 		{
 			get
 			{
-				return this._Property.Entity;
+				return this._UpdateDateTime;
 			}
 			set
 			{
-				Property previousValue = this._Property.Entity;
-				if (((previousValue != value) 
-							|| (this._Property.HasLoadedOrAssignedValue == false)))
+				if ((this._UpdateDateTime != value))
 				{
+					this.OnUpdateDateTimeChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Property.Entity = null;
-						previousValue.Users.Remove(this);
-					}
-					this._Property.Entity = value;
-					if ((value != null))
-					{
-						value.Users.Add(this);
-						this._PropertyId = value.PropertyId;
-					}
-					else
-					{
-						this._PropertyId = default(int);
-					}
-					this.SendPropertyChanged("Property");
+					this._UpdateDateTime = value;
+					this.SendPropertyChanged("UpdateDateTime");
+					this.OnUpdateDateTimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_User", Storage="_Department", ThisKey="UserId", OtherKey="DepartmentId", IsForeignKey=true)]
-		public Department Department
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<User> Users
 		{
 			get
 			{
-				return this._Department.Entity;
+				return this._Users;
 			}
 			set
 			{
-				Department previousValue = this._Department.Entity;
-				if (((previousValue != value) 
-							|| (this._Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Department.Entity = null;
-						previousValue.Users.Remove(this);
-					}
-					this._Department.Entity = value;
-					if ((value != null))
-					{
-						value.Users.Add(this);
-						this._UserId = value.DepartmentId;
-					}
-					else
-					{
-						this._UserId = default(int);
-					}
-					this.SendPropertyChanged("Department");
-				}
+				this._Users.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_Services", ThisKey="ServiceId", OtherKey="ServiceId")]
+		public EntitySet<Service> Services
+		{
+			get
+			{
+				return this._Services;
+			}
+			set
+			{
+				this._Services.Assign(value);
 			}
 		}
 		
@@ -704,6 +744,264 @@ namespace DataModelLib
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = null;
+		}
+		
+		private void attach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = this;
+		}
+		
+		private void detach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ConsumeLog")]
+	public partial class ConsumeLog
+	{
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _Date;
+		
+		private string _ClientIp;
+		
+		private string _Url;
+		
+		private string _User;
+		
+		public ConsumeLog()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="Date")]
+		public System.Nullable<System.DateTime> Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this._Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientIp", DbType="NVarChar(100)")]
+		public string ClientIp
+		{
+			get
+			{
+				return this._ClientIp;
+			}
+			set
+			{
+				if ((this._ClientIp != value))
+				{
+					this._ClientIp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Url", DbType="NVarChar(2500)")]
+		public string Url
+		{
+			get
+			{
+				return this._Url;
+			}
+			set
+			{
+				if ((this._Url != value))
+				{
+					this._Url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[User]", Storage="_User", DbType="NVarChar(50)")]
+		public string User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				if ((this._User != value))
+				{
+					this._User = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ErrorLog")]
+	public partial class ErrorLog
+	{
+		
+		private int _Id;
+		
+		private System.Nullable<System.DateTime> _ErrorDate;
+		
+		private string _Message;
+		
+		private string _Detail;
+		
+		private string _ClientIp;
+		
+		private string _Url;
+		
+		private string _User;
+		
+		public ErrorLog()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this._Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ErrorDate
+		{
+			get
+			{
+				return this._ErrorDate;
+			}
+			set
+			{
+				if ((this._ErrorDate != value))
+				{
+					this._ErrorDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="NVarChar(MAX)")]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this._Message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Detail", DbType="NVarChar(MAX)")]
+		public string Detail
+		{
+			get
+			{
+				return this._Detail;
+			}
+			set
+			{
+				if ((this._Detail != value))
+				{
+					this._Detail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientIp", DbType="NVarChar(100)")]
+		public string ClientIp
+		{
+			get
+			{
+				return this._ClientIp;
+			}
+			set
+			{
+				if ((this._ClientIp != value))
+				{
+					this._ClientIp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Url", DbType="NVarChar(2500)")]
+		public string Url
+		{
+			get
+			{
+				return this._Url;
+			}
+			set
+			{
+				if ((this._Url != value))
+				{
+					this._Url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[User]", Storage="_User", DbType="NVarChar(50)")]
+		public string User
+		{
+			get
+			{
+				return this._User;
+			}
+			set
+			{
+				if ((this._User != value))
+				{
+					this._User = value;
+				}
 			}
 		}
 	}

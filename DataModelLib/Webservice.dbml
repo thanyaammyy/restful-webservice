@@ -1,34 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WebService" Class="WebserviceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=SHQDSPS1\ONCOMOSQL;Initial Catalog=WebService;Persist Security Info=True;User ID=webservice" SettingsObjectName="DataModelLib.Properties.Settings" SettingsPropertyName="WebServiceConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Property" Member="Properties">
-    <Type Name="Property">
-      <Column Name="PropertyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PropertyCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PropertyName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Property_User" Member="Users" ThisKey="PropertyId" OtherKey="PropertyId" Type="User" />
+  <Table Name="dbo.Service" Member="Services">
+    <Type Name="Service">
+      <Column Name="ServiceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ServiceURL" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="UserService_Service" Member="UserService" ThisKey="ServiceId" OtherKey="ServiceId" Type="UserService" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Department" Member="Departments">
-    <Type Name="Department">
-      <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DepartmentCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="DepartmentName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Department_User" Member="Users" ThisKey="DepartmentId" OtherKey="UserId" Type="User" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
+  <Table Name="dbo.[User]" Member="Users">
     <Type Name="User">
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PropertyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="UserService_User" Member="UserService" ThisKey="UserId" OtherKey="UserId" Type="UserService" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserService" Member="UserServices">
+    <Type Name="UserService">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Property_User" Member="Property" ThisKey="PropertyId" OtherKey="PropertyId" Type="Property" IsForeignKey="true" />
-      <Association Name="Department_User" Member="Department" ThisKey="UserId" OtherKey="DepartmentId" Type="Department" IsForeignKey="true" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="UserService_User" Member="Users" ThisKey="UserId" OtherKey="UserId" Type="User" />
+      <Association Name="UserService_Service" Member="Services" ThisKey="ServiceId" OtherKey="ServiceId" Type="Service" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ConsumeLog" Member="ConsumeLogs">
+    <Type Name="ConsumeLog">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ClientIp" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
+      <Column Name="[User]" Member="User" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ErrorLog" Member="ErrorLogs">
+    <Type Name="ErrorLog">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ErrorDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Detail" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClientIp" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
+      <Column Name="[User]" Member="User" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

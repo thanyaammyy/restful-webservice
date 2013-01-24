@@ -1,6 +1,6 @@
 ﻿namespace DataModelLib
 {
-    public partial class User
+    public partial class UserService
     {
         public string StatusLabel
         {
