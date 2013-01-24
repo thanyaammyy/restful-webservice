@@ -2,47 +2,29 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
+using DataModelLib;
 
 namespace DataModelLib.Page
 {
     public static class UserHelper
     {
-        public static List<DataModelLib.Helper.User> ListUser()
+        public static List<User> ListUser()
         {
-            var mdc = new WebserviceDataContext();
-            List<DataModelLib.Helper.User> listUser= null;
-            listUser = (from user in mdc.Users
-                        join property in mdc.Properties on user.PropertyId equals property.PropertyId
-                        join department in mdc.Departments on user.DepartmentId equals department.DepartmentId
-                        orderby property.PropertyCode, department.DepartmentCode
-                        select new DataModelLib.Helper.User()
-                                   {
-                                       UserId = user.UserId,
-                                       Username = user.Username,
-                                       Password = user.Password,
-                                       IP = user.IP,
-                                       StatusLabel = user.StatusLabel,
-                                       DepartmentCode = department.DepartmentCode,
-                                       PropertyCode = property.PropertyCode
-                                   }).ToList();
-            
-            return listUser;
+            var wdc = new WebserviceDataContext();
+            return wdc.Users.ToList();
         }
 
         public static void AddUser(User user)
         {
             using (var hdc = new WebserviceDataContext())
             {
-                hdc.Users.InsertOnSubmit(new DataModelLib.User
+                hdc.Users.InsertOnSubmit(new User
                 {
                     Username = user.Username,
                     Password = user.Password,
-                    IP = user.IP,
-                    PropertyId = user.PropertyId,
-                    DepartmentId = user.DepartmentId,
-                    UpdateDateTime = DateTime.Now,
-                    Status = user.Status
+                    Description = user.Description,
+                    UpdateUser = user.UpdateUser,
+                    UpdateDateTime = DateTime.Now
                 });
 
                 try
@@ -63,15 +45,13 @@ namespace DataModelLib.Page
         {
             using (var hdc = new WebserviceDataContext())
             {
-                var getUser = hdc.Users.Single(item => item.UserId == user.UserId);
+                var usr = hdc.Users.Single(item => item.UserId == user.UserId);
 
-                    getUser.Username = user.Username;
-                    getUser.Password = user.Password;
-                    getUser.IP = user.IP;
-                    getUser.PropertyId = user.PropertyId;
-                    getUser.DepartmentId = user.DepartmentId;
-                    getUser.UpdateDateTime = DateTime.Now;
-                    getUser.Status = user.Status;
+                usr.Username = user.Username;
+                usr.Password = user.Password;
+                usr.Description = user.Description;
+                usr.UpdateUser = user.UpdateUser;
+                usr.UpdateDateTime = DateTime.Now;
 
                 try
                 {
@@ -87,12 +67,12 @@ namespace DataModelLib.Page
             }
         }
 
-        public static void DeleteUser(int userId)
+        public static void DeleteUser(int UserId)
         {
             using (var hdc = new WebserviceDataContext())
             {
-                var user = hdc.Users.Single(item => item.UserId == userId);
-                hdc.Users.DeleteOnSubmit(user);
+                var User = hdc.Users.Single(item => item.UserId == UserId);
+                hdc.Users.DeleteOnSubmit(User);
                 try
                 {
                     hdc.SubmitChanges();
