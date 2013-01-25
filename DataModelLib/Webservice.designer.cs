@@ -87,14 +87,6 @@ namespace DataModelLib
 			}
 		}
 		
-		public System.Data.Linq.Table<UserService> UserServices
-		{
-			get
-			{
-				return this.GetTable<UserService>();
-			}
-		}
-		
 		public System.Data.Linq.Table<ConsumeLog> ConsumeLogs
 		{
 			get
@@ -108,6 +100,14 @@ namespace DataModelLib
 			get
 			{
 				return this.GetTable<ErrorLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<UserService> UserServices
+		{
+			get
+			{
+				return this.GetTable<UserService>();
 			}
 		}
 	}
@@ -534,244 +534,6 @@ namespace DataModelLib
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserService")]
-	public partial class UserService : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _UserId;
-		
-		private int _ServiceId;
-		
-		private System.Nullable<int> _Status;
-		
-		private string _UpdateUser;
-		
-		private System.DateTime _UpdateDateTime;
-		
-		private EntitySet<User> _Users;
-		
-		private EntitySet<Service> _Services;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUserIdChanging(int value);
-    partial void OnUserIdChanged();
-    partial void OnServiceIdChanging(int value);
-    partial void OnServiceIdChanged();
-    partial void OnStatusChanging(System.Nullable<int> value);
-    partial void OnStatusChanged();
-    partial void OnUpdateUserChanging(string value);
-    partial void OnUpdateUserChanged();
-    partial void OnUpdateDateTimeChanging(System.DateTime value);
-    partial void OnUpdateDateTimeChanged();
-    #endregion
-		
-		public UserService()
-		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
-		public int UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceId", DbType="Int NOT NULL")]
-		public int ServiceId
-		{
-			get
-			{
-				return this._ServiceId;
-			}
-			set
-			{
-				if ((this._ServiceId != value))
-				{
-					this.OnServiceIdChanging(value);
-					this.SendPropertyChanging();
-					this._ServiceId = value;
-					this.SendPropertyChanged("ServiceId");
-					this.OnServiceIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUser", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string UpdateUser
-		{
-			get
-			{
-				return this._UpdateUser;
-			}
-			set
-			{
-				if ((this._UpdateUser != value))
-				{
-					this.OnUpdateUserChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateUser = value;
-					this.SendPropertyChanged("UpdateUser");
-					this.OnUpdateUserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date NOT NULL")]
-		public System.DateTime UpdateDateTime
-		{
-			get
-			{
-				return this._UpdateDateTime;
-			}
-			set
-			{
-				if ((this._UpdateDateTime != value))
-				{
-					this.OnUpdateDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateDateTime = value;
-					this.SendPropertyChanged("UpdateDateTime");
-					this.OnUpdateDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_Services", ThisKey="ServiceId", OtherKey="ServiceId")]
-		public EntitySet<Service> Services
-		{
-			get
-			{
-				return this._Services;
-			}
-			set
-			{
-				this._Services.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = null;
-		}
-		
-		private void attach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = this;
-		}
-		
-		private void detach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ConsumeLog")]
 	public partial class ConsumeLog
 	{
@@ -1003,6 +765,268 @@ namespace DataModelLib
 					this._User = value;
 				}
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserService")]
+	public partial class UserService : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _UserId;
+		
+		private int _ServiceId;
+		
+		private System.Nullable<int> _Status;
+		
+		private string _UpdateUser;
+		
+		private System.DateTime _UpdateDateTime;
+		
+		private string _Ips;
+		
+		private EntitySet<User> _Users;
+		
+		private EntitySet<Service> _Services;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnServiceIdChanging(int value);
+    partial void OnServiceIdChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnUpdateUserChanging(string value);
+    partial void OnUpdateUserChanged();
+    partial void OnUpdateDateTimeChanging(System.DateTime value);
+    partial void OnUpdateDateTimeChanged();
+    partial void OnIpsChanging(string value);
+    partial void OnIpsChanged();
+    #endregion
+		
+		public UserService()
+		{
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="Int NOT NULL")]
+		public int UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ServiceId", DbType="Int NOT NULL")]
+		public int ServiceId
+		{
+			get
+			{
+				return this._ServiceId;
+			}
+			set
+			{
+				if ((this._ServiceId != value))
+				{
+					this.OnServiceIdChanging(value);
+					this.SendPropertyChanging();
+					this._ServiceId = value;
+					this.SendPropertyChanged("ServiceId");
+					this.OnServiceIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateUser", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UpdateUser
+		{
+			get
+			{
+				return this._UpdateUser;
+			}
+			set
+			{
+				if ((this._UpdateUser != value))
+				{
+					this.OnUpdateUserChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateUser = value;
+					this.SendPropertyChanged("UpdateUser");
+					this.OnUpdateUserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateDateTime", DbType="Date NOT NULL")]
+		public System.DateTime UpdateDateTime
+		{
+			get
+			{
+				return this._UpdateDateTime;
+			}
+			set
+			{
+				if ((this._UpdateDateTime != value))
+				{
+					this.OnUpdateDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateDateTime = value;
+					this.SendPropertyChanged("UpdateDateTime");
+					this.OnUpdateDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Ips", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Ips
+		{
+			get
+			{
+				return this._Ips;
+			}
+			set
+			{
+				if ((this._Ips != value))
+				{
+					this.OnIpsChanging(value);
+					this.SendPropertyChanging();
+					this._Ips = value;
+					this.SendPropertyChanged("Ips");
+					this.OnIpsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<User> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_Services", ThisKey="ServiceId", OtherKey="ServiceId")]
+		public EntitySet<Service> Services
+		{
+			get
+			{
+				return this._Services;
+			}
+			set
+			{
+				this._Services.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = null;
+		}
+		
+		private void attach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = this;
+		}
+		
+		private void detach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = null;
 		}
 	}
 }
