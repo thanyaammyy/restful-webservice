@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Services\GuestService.svc" />
     <Content Include="Services\EmailService.svc" />
     <Content Include="Services\RestService.svc" />
@@ -75,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="authentication\CustomUserNameValidator.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Services\GuestService.svc.cs">
       <DependentUpon>GuestService.svc</DependentUpon>
     </Compile>

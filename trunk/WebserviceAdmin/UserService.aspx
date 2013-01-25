@@ -77,7 +77,7 @@
                         </EditClientSideValidators>
                     </cc1:JQGridColumn>
                     <cc1:JQGridColumn HeaderText="Status" DataField="StatusLabel" Editable="True" EditType="DropDown"
-                        EditValues="0:InActive;1:Active" TextAlign="Center" />
+                        EditValues="1:Active;0:InActive" TextAlign="Center" />
                 </Columns>
                 <AddDialogSettings CloseAfterAdding="True" />
                 <EditDialogSettings CloseAfterEditing="True" />
