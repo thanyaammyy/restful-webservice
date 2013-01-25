@@ -10,7 +10,7 @@
 namespace WebserviceAdmin {
     
     
-    public partial class Department {
+    public partial class Service {
         
         /// <summary>
         /// updatepanel1 control.
@@ -22,12 +22,12 @@ namespace WebserviceAdmin {
         protected global::System.Web.UI.UpdatePanel updatepanel1;
         
         /// <summary>
-        /// JqgridDept control.
+        /// JqgridService control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Trirand.Web.UI.WebControls.JQGrid JqgridDept;
+        protected global::Trirand.Web.UI.WebControls.JQGrid JqgridService;
     }
 }

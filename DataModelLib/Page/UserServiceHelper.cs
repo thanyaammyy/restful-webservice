@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataModelLib.Page
 {
-    public static class UserServiceServiceHelper
+    public static class UserServiceHelper
     {
         public static List<DataModelLib.Helper.UserService> ListUserService()
         {
