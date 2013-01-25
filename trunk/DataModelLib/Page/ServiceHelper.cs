@@ -84,5 +84,21 @@ namespace DataModelLib.Page
                 }
             }
         }
+
+        public static int GetServiceFromUrl(string url)
+        {
+            var serviceId = 0;
+
+            using (var hdc = new WebserviceDataContext())
+            {
+                var count = hdc.Services.Count(item => item.ServiceURL.Equals(url));
+                if (count != 0)
+                {
+                    var service = hdc.Services.Single(item => item.ServiceURL.Equals(url));
+                    serviceId = service.ServiceId;
+                }
+            }
+            return serviceId;
+        }
     }
 }
