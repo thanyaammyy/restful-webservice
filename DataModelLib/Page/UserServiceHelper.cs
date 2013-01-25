@@ -103,5 +103,35 @@ namespace DataModelLib.Page
                 }
             }
         }
+
+        public static bool AuthorizeUserService(string username, string password, string ip, string url)
+        {
+            var isAuthorized = false;
+            var userId = UserHelper.Authentication(username, password);
+            var serviceId = ServiceHelper.GetServiceFromUrl(url);
+            if (userId == 0 || serviceId == 0) return false;
+            using (var wdc = new WebserviceDataContext())
+            {
+                var count = wdc.UserServices.Count(item => item.UserId==userId && item.ServiceId==serviceId);
+                if (count != 0)
+                {
+                    var ips = wdc.UserServices.Single(item => item.UserId == userId && item.ServiceId == serviceId).Ips;
+                    if(ip.Contains(';'))
+                    {
+                        var strIp = ips.Split(';');
+                        foreach (var s in strIp)
+                        {
+                            if (s.Equals(ip)) isAuthorized = true;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (ips.Equals(ip)) isAuthorized = true;
+                    }
+                }
+            }
+            return isAuthorized;
+        }
     }
 }

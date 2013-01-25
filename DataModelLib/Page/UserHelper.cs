@@ -100,5 +100,21 @@ namespace DataModelLib.Page
             }
             return user;
         }
+
+        public static int Authentication(string username, string password)
+        {
+            var userId = 0;
+
+            using (var hdc = new WebserviceDataContext())
+            {
+                var count = hdc.Users.Count(item => item.Username.Equals(username)&&item.Password.Equals(password));
+                if (count != 0)
+                {
+                    var user = hdc.Users.Single(item => item.Username.Equals(username) && item.Password.Equals(password));
+                    userId = user.UserId;
+                }
+            }
+            return userId;
+        }
     }
 }
