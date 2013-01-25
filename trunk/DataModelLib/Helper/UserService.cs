@@ -15,5 +15,6 @@ namespace DataModelLib.Helper
         public string ServiceUrl { get; set; }
         public int? Status { get; set; }
         public string Description { get; set; }
+        public string Ips { get; set; }
     }
 }

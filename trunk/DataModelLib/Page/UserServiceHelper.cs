@@ -21,7 +21,9 @@ namespace DataModelLib.Page
                                        Id = userService.Id,
                                        Username = user.Username,
                                        ServiceName = service.ServiceName,
+                                       ServiceUrl = service.ServiceURL,
                                        Status = userService.Status,
+                                       Ips = userService.Ips
                                    }).ToList();
             
             return listUserService;
@@ -37,6 +39,7 @@ namespace DataModelLib.Page
                     UserId = userService.UserId,
                     UpdateUser = userService.UpdateUser,
                     UpdateDateTime = DateTime.Now,
+                    Ips = userService.Ips,
                     Status = userService.Status
                 });
 
@@ -65,6 +68,7 @@ namespace DataModelLib.Page
                     getUserService.UpdateUser = userService.UpdateUser;
                     getUserService.UpdateDateTime = DateTime.Now;
                     getUserService.Status = userService.Status;
+                    getUserService.Ips = userService.Ips;
 
                 try
                 {
