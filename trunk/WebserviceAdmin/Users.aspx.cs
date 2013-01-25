@@ -20,23 +20,18 @@ namespace WebserviceAdmin
 
         protected void JqgridUser_RowAdding(object sender, Trirand.Web.UI.WebControls.JQGridRowAddEventArgs e)
         {
-            var status = e.RowData["StatusLabel"];
-            var property = e.RowData["PropertyCode"];
-            var department = e.RowData["DepartmentCode"];
-            var ip = e.RowData["IP"];
             var password = e.RowData["Password"];
             var username = e.RowData["Username"];
+            var description = e.RowData["Description"];
             var admin = Session["UserSession"].ToString();
-            if (!(string.IsNullOrEmpty(status) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(property) || string.IsNullOrEmpty(department)))
+            if (!(string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username)))
             {
                 var user = new DataModelLib.User()
                 {
-                    PropertyId = Convert.ToInt32(property),
-                    DepartmentId = Convert.ToInt32(department),
-                    IP = ip,
-                    Status = Convert.ToInt32(status),
+                    
                     Username = username,
                     Password = password,
+                    Description = description,
                     UpdateUser = admin
                 };
                 if (UserHelper.IsUserExist(user.Username)) return;
@@ -53,25 +48,19 @@ namespace WebserviceAdmin
 
         protected void JqgridUser_RowEditing(object sender, Trirand.Web.UI.WebControls.JQGridRowEditEventArgs e)
         {
-            var status = e.RowData["StatusLabel"];
-            var property = e.RowData["PropertyCode"];
-            var department = e.RowData["DepartmentCode"];
-            var ip = e.RowData["IP"];
             var password = e.RowData["Password"];
             var username = e.RowData["Username"];
+            var description = e.RowData["Description"];
             var id = e.RowKey;
             var admin = Session["UserSession"].ToString();
-            if (!(string.IsNullOrEmpty(status) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(property) || string.IsNullOrEmpty(department)))
+            if (!(string.IsNullOrEmpty(password) || string.IsNullOrEmpty(username)))
             {
                 var user = new DataModelLib.User()
                 {
                     UserId = Convert.ToInt32(id),
-                    PropertyId = Convert.ToInt32(property),
-                    DepartmentId = Convert.ToInt32(department),
-                    IP = ip,
-                    Status = Convert.ToInt32(status),
                     Username = username,
                     Password = password,
+                    Description = description,
                     UpdateUser = admin
                 };
                 UserHelper.UpdateUser(user);
