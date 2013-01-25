@@ -1,4 +1,4 @@
-﻿namespace DataModelLib
+﻿namespace DataModelLib.Helper
 {
     public partial class UserService
     {

@@ -37,7 +37,7 @@ namespace WebserviceAdmin
                         var encryptUser = Encryption.EncryptStringAES(username, strSharedSecret);
                         
                         Session["loginKey"] = encryptUser;
-                        Response.Redirect("Repository.aspx");
+                        Response.Redirect("Service.aspx");
                     }
                     else
                     {

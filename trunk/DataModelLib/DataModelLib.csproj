@@ -62,7 +62,7 @@
     <Compile Include="Page\MedalliaHelper.cs" />
     <Compile Include="Page\UserHelper.cs" />
     <Compile Include="Page\UserServiceHelper.cs" />
-    <Compile Include="Partail\Users.cs" />
+    <Compile Include="Partail\UsersService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Webservice.designer.cs">
       <AutoGen>True</AutoGen>
