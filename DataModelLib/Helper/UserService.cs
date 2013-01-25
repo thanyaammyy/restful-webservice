@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataModelLib.Helper
 {
-    public class UserService
+    public partial class UserService
     {
         public int Id { get; set; }
         public int UserId { get; set; }

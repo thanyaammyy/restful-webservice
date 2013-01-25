@@ -19,8 +19,10 @@
             if (value.indexOf(';') !== -1) {
                 var ips = value.split(';');
                 for (var i = 0; i < ips.length; i++) {
-                    if (!pattern.test(ips[i]))
-                        return [false, "Please enter a valid IP format"];
+                    if (ips[i]) {
+                        if (!pattern.test(ips[i]))
+                            return [false, "Please enter a valid IP format"];
+                    }
                 }
                 return [true, ""];
             }
@@ -55,13 +57,13 @@
                 <Columns>
                     <cc1:JQGridColumn DataField="Id" Searchable="False" PrimaryKey="True" Width="55"
                         Visible="False" />
-                    <cc1:JQGridColumn HeaderText="User" DataField="UserId" Editable="True"
+                    <cc1:JQGridColumn HeaderText="User" DataField="Username" Editable="True"
                         EditorControlID="ddlUser" EditType="DropDown" TextAlign="Left">
                         <EditClientSideValidators>
                             <cc1:RequiredValidator />
                         </EditClientSideValidators>
                     </cc1:JQGridColumn>
-                    <cc1:JQGridColumn HeaderText="Service Name" DataField="ServiceId" Editable="True"
+                    <cc1:JQGridColumn HeaderText="Service Name" DataField="ServiceName" Editable="True"
                         EditType="DropDown" EditorControlID="ddlService" TextAlign="Left">
                         <EditClientSideValidators>
                             <cc1:RequiredValidator />
@@ -85,9 +87,9 @@
                 <PagerSettings PageSize="20" />
                 <DeleteDialogSettings LeftOffset="497" TopOffset="241"></DeleteDialogSettings>
                 <AddDialogSettings Width="300" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
-                    CloseAfterAdding="True" Caption="Add User" ClearAfterAdding="True"></AddDialogSettings>
+                    CloseAfterAdding="True" Caption="Add User Service" ClearAfterAdding="True"></AddDialogSettings>
                 <EditDialogSettings Width="300" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
-                    CloseAfterEditing="True" Caption="Edit User"></EditDialogSettings>
+                    CloseAfterEditing="True" Caption="Edit User Service"></EditDialogSettings>
                 <ClientSideEvents RowDoubleClick="editRow" />
             </cc1:JQGrid>
         </ContentTemplate>
