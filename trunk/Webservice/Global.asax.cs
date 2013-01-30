@@ -48,12 +48,5 @@ namespace Webservice
 
         }
 
-        protected void Applcation_PreSendRequestHeaders(object sender, EventArgs e)
-        {
-            Session["url"] = Request.Url;
-            Session["urlRef"] = Request.UrlReferrer;
-            Session["ip"] = HttpContext.Current.Request.UserHostAddress;
-        }
-
     }
 }
