@@ -174,10 +174,6 @@
       <Project>{29CA72B7-4F39-46E7-8FE9-C2002660E481}</Project>
       <Name>DataModelLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Webservice\Webservice.csproj">
-      <Project>{16C39280-949B-43FE-9A8D-782CAD053200}</Project>
-      <Name>Webservice</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.Master" />
