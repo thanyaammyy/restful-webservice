@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\Encryption.cs" />
+    <Compile Include="Helper\Medallia.cs" />
     <Compile Include="Helper\UserService.cs" />
     <Compile Include="Medallia.designer.cs">
       <AutoGen>True</AutoGen>

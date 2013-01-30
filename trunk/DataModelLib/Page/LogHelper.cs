@@ -6,7 +6,7 @@ namespace DataModelLib.Page
 {
     public  static class LogHelper
     {
-        public static void StoreError(string errMsg, string stacktrace, string Url, string user)
+        public static void StoreError(string errMsg, string stacktrace, string Url)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace DataModelLib.Page
             }
         }
 
-        public static void StoreConsumenService(string Url, string user)
+        public static void StoreConsumenService(string Url)
         {
             try
             {

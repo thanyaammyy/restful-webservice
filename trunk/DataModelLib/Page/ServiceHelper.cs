@@ -85,17 +85,17 @@ namespace DataModelLib.Page
             }
         }
 
-        public static int GetServiceFromUrl(string url)
+        public static int GetServiceFromUrl(string url, string service)
         {
             var serviceId = 0;
 
             using (var hdc = new WebserviceDataContext())
             {
-                var count = hdc.Services.Count(item => item.ServiceURL.Equals(url));
+                var count = hdc.Services.Count(item => item.ServiceURL.ToLower().Equals(url.ToLower())&&item.ServiceName.ToLower().Equals(service.ToLower()));
                 if (count != 0)
                 {
-                    var service = hdc.Services.Single(item => item.ServiceURL.Equals(url));
-                    serviceId = service.ServiceId;
+                    var services = hdc.Services.Single(item => item.ServiceURL.Equals(url));
+                    serviceId = services.ServiceId;
                 }
             }
             return serviceId;

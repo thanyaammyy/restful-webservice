@@ -27,19 +27,20 @@ namespace WebserviceAdmin
 
         protected void JqgridUserService_RowAdding(object sender, Trirand.Web.UI.WebControls.JQGridRowAddEventArgs e)
         {
-            var userId = e.RowData["UserId"];
-            var serviceId = e.RowData["ServiceId"];
+            var user = e.RowData["Username"];
+            var service = e.RowData["ServiceName"];
             var ips = e.RowData["Ips"];
             var status = e.RowData["StatusLabel"];
             var admin = Session["UserSession"].ToString();
-            if (!(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(serviceId)))
+            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(service)))
             {
 
                 var userService = new DataModelLib.UserService()
                 {
-                    UserId = Convert.ToInt32(userId),
-                    ServiceId = Convert.ToInt32(serviceId),
+                    UserId = Convert.ToInt32(user),
+                    ServiceId = Convert.ToInt32(service),
                     Ips = ips,
+                    Status = Convert.ToInt32(status),
                     UpdateUser = admin
                 };
                 UserServiceHelper.AddUserService(userService);
@@ -48,21 +49,22 @@ namespace WebserviceAdmin
 
         protected void JqgridUserService_RowEditing(object sender, Trirand.Web.UI.WebControls.JQGridRowEditEventArgs e)
         {
-            var userId = e.RowData["UserId"];
-            var serviceId = e.RowData["ServiceId"];
+            var user = e.RowData["Username"];
+            var service = e.RowData["ServiceName"];
             var ips = e.RowData["Ips"];
             var status = e.RowData["StatusLabel"];
             var admin = Session["UserSession"].ToString();
             var id = e.RowKey;
-            if (!(string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(serviceId)))
+            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(service)))
             {
 
                 var userService = new DataModelLib.UserService()
                 {
                     Id = Convert.ToInt32(id),
-                    UserId = Convert.ToInt32(userId),
-                    ServiceId = Convert.ToInt32(serviceId),
+                    UserId = Convert.ToInt32(user),
+                    ServiceId = Convert.ToInt32(service),
                     Ips = ips,
+                    Status = Convert.ToInt32(status),
                     UpdateUser = admin
                 };
                 UserServiceHelper.UpdateUserService(userService);
