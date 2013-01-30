@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.IdentityModel.Selectors;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Web;
 using DataModelLib.Page;
+using System.DirectoryServices;
 
 namespace Webservice.authentication
 {
@@ -17,14 +19,39 @@ namespace Webservice.authentication
             {
                 throw new ArgumentNullException();
             }
-
-            if (!Authentication(userName,password))
+            var strAuthorize = ConfigurationManager.AppSettings["admin"];
+            if (userName.Contains(strAuthorize))
             {
-                throw new SecurityTokenException("You are not authorized to access this service.");
+                if (!AuthenticateActiveDirectory(userName, password))
+                {
+                    throw new SecurityTokenException("You are not authorized to access this service.");
+                }
+            }
+            else
+            {
+                if (!Authentication(userName, password))
+                {
+                    throw new SecurityTokenException("You are not authorized to access this service.");
+                }
             }
         }
 
-        private static bool Authentication(string userName, string password)
+        public bool AuthenticateActiveDirectory(string userName, string password)
+        {
+            var strLdap = ConfigurationManager.AppSettings["ldap"];
+            try
+            {
+                var entry = new DirectoryEntry(strLdap, userName, password);
+                var nativeObject = entry.NativeObject;
+                return true;
+            }
+            catch (DirectoryServicesCOMException)
+            {
+                return false;
+            }
+        }
+
+        private bool Authentication(string userName, string password)
         {
             var ip = GetIp();
             var url = GetUrl();
@@ -36,13 +63,13 @@ namespace Webservice.authentication
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
         
-        private static string GetUrl()
+        private string GetUrl()
         {
             var oc = OperationContext.Current;
             return oc.EndpointDispatcher.EndpointAddress.Uri.ToString();
         }
 
-        private static string GetIp()
+        private string GetIp()
         {
             var ip = "";
             var props = OperationContext.Current.IncomingMessageProperties;
@@ -56,7 +83,6 @@ namespace Webservice.authentication
 
         private static string GetService()
         {
-            var ip = "";
             var props = OperationContext.Current.IncomingMessageProperties;
             var via = props.Via;
             var service = via.Segments[3].ToString();
