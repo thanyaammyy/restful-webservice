@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Webservice.Services.RestService" CodeBehind="RestService.svc.cs" %>

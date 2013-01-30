@@ -24,9 +24,9 @@ namespace Webservice
         protected void Application_EndRequest(object sender, EventArgs e)
         {
             if (Request.UrlReferrer != null)
-                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: " + Request.UrlReferrer, Request.UserHostName);
+                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: " + Request.UrlReferrer);
             else
-                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: Unknown", Request.UserHostName);
+                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: Unknown");
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
@@ -38,9 +38,9 @@ namespace Webservice
         {
             var ex = Server.GetLastError().GetBaseException();
             if (Request.UrlReferrer != null)
-                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: " + Request.UrlReferrer,Request.UserHostName);
+                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: " + Request.UrlReferrer);
             else
-                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: Unknown", Request.UserHostName);
+                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: Unknown");
         }
 
         protected void Session_End(object sender, EventArgs e)
@@ -48,9 +48,12 @@ namespace Webservice
 
         }
 
-        protected void Application_End(object sender, EventArgs e)
+        protected void Applcation_PreSendRequestHeaders(object sender, EventArgs e)
         {
-
+            Session["url"] = Request.Url;
+            Session["urlRef"] = Request.UrlReferrer;
+            Session["ip"] = HttpContext.Current.Request.UserHostAddress;
         }
+
     }
 }

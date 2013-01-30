@@ -34,11 +34,10 @@ namespace WebserviceAdmin
         protected void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError().GetBaseException();
-            var admin = Session["UserSession"].ToString();
             if (Request.UrlReferrer != null)
-                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: " + Request.UrlReferrer,admin);
+                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: " + Request.UrlReferrer);
             else
-                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: Unknown", admin);
+                LogHelper.StoreError(ex.Message, ex.StackTrace, Request.Url + " ::[From]:: Unknown");
         }
 
         protected void Session_End(object sender, EventArgs e)

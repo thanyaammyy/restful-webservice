@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace DataModelLib.Page
 {
@@ -104,11 +105,11 @@ namespace DataModelLib.Page
             }
         }
 
-        public static bool AuthorizeUserService(string username, string password, string ip, string url)
+        public static bool AuthorizeUserService(string username, string password, string ip, string url, string service)
         {
             var isAuthorized = false;
             var userId = UserHelper.Authentication(username, password);
-            var serviceId = ServiceHelper.GetServiceFromUrl(url);
+            var serviceId = ServiceHelper.GetServiceFromUrl(url,service);
             if (userId == 0 || serviceId == 0) return false;
             using (var wdc = new WebserviceDataContext())
             {
@@ -127,7 +128,12 @@ namespace DataModelLib.Page
                     }
                     else
                     {
-                        if (ips.Equals(ip)) isAuthorized = true;
+                        if (string.IsNullOrEmpty(ips))
+                        {
+                            return true;
+                        }
+                        var cIp = ips.Remove(ips.Length - 1, 1);
+                        if (cIp.Equals(ip)) isAuthorized = true;
                     }
                 }
             }
