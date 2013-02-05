@@ -12,8 +12,8 @@
         </div>
     </div>
     <div id="divAdmin" style="padding: 20px; text-align: center">
-        <a href="../Service.aspx" class="menu" >Service</a> <span style="color: white; padding: 2px">l</span> 
-        <a href="../Users.aspx" class="menu" >User</a> <span style="color: white; padding: 2px">l</span> 
-        <a href="../UserService.aspx" class="menu" >User Service Management</a>
+        <a href="Service.aspx" class="menu" >Service</a> <span style="color: white; padding: 2px">l</span> 
+        <a href="Users.aspx" class="menu" >User</a> <span style="color: white; padding: 2px">l</span> 
+        <a href="UserService.aspx" class="menu" >User Service Management</a>
     </div>
 </div>

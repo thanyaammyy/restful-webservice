@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Webservice.Services.EcomService" CodeBehind="EcomService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Webservice.Services.EcomService" CodeBehind="EcomService.svc.cs" Factory="WcfRestContrib.ServiceModel.Activation.WebServiceHostFactory" %>
