@@ -19,7 +19,7 @@ namespace DataModelLib.Page
         {
             var mdc = new MedalliaDataContext();
             List<Medallia> guest;
-            if(checkOutDate.ToLower().Equals("all"))
+            if(checkOutDate.ToLower().Equals("any"))
             {
                guest = (from tbdat in mdc.TBDATs
                            where tbdat.PROPERTYCODE == propertyCode
@@ -61,7 +61,7 @@ namespace DataModelLib.Page
         {
             var mdc = new MedalliaDataContext();
             List<Medallia> guest;
-            if(checkOutDate.ToLower().Equals("all"))
+            if(checkOutDate.ToLower().Equals("any"))
             {
                 guest = (from tbData in mdc.TBDATs
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
