@@ -61,15 +61,32 @@ namespace Webservice.authentication
             {
                 throw new SecurityTokenException("You are not authorized to access this service.");
             }
+            //if (UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service))
+            //{
+            //    LogHelper.StoreConsumenService(ip, url, userName, service);
+            //}
+            //else
+            //{
+            //    //var userId = UserHelper.Authentication(userName, password);
+            //    //var serviceId = ServiceHelper.GetServiceFromUrl(url,service);
+            //    //var userServiceId = UserServiceHelper.CountUserService(userId, serviceId);
+            //    //var usfService = UserServiceHelper.UserFuckService(userServiceId, ip);
+            //    //LogHelper.StoreConsumenService(ip, url, userName, service + " UserId= " + userId + " ServiceId=" + serviceId + " UserServiceId=" + userServiceId + " result= " + usfService);
+            //    LogHelper.StoreConsumenService(ip, url, userName, service);
+            //}
+
             LogHelper.StoreConsumenService(ip, url, userName, service);
-            
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
         
         private string GetUrl()
         {
-            var context = OperationContext.Current;
-            return context.IncomingMessageHeaders.To.PathAndQuery;
+            var oc = OperationContext.Current;
+            var host = oc.IncomingMessageHeaders.To.Host;
+            var domain = ConfigurationManager.AppSettings["domain"];
+            var uri = oc.EndpointDispatcher.EndpointAddress.Uri.ToString();
+            var url = uri.Contains(host) ? uri.Replace(host, domain) : uri;
+            return url;
         }
 
         private string GetIp()

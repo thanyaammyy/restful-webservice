@@ -67,12 +67,12 @@ namespace DataModelLib.Page
             }
         }
 
-        public static void DeleteUser(int UserId)
+        public static void DeleteUser(int userId)
         {
             using (var hdc = new WebserviceDataContext())
             {
-                var User = hdc.Users.Single(item => item.UserId == UserId);
-                hdc.Users.DeleteOnSubmit(User);
+                var user = hdc.Users.Single(item => item.UserId == userId);
+                hdc.Users.DeleteOnSubmit(user);
                 try
                 {
                     hdc.SubmitChanges();
