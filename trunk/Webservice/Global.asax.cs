@@ -23,10 +23,7 @@ namespace Webservice
 
         protected void Application_EndRequest(object sender, EventArgs e)
         {
-            if (Request.UrlReferrer != null)
-                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: " + Request.UrlReferrer);
-            else
-                LogHelper.StoreConsumenService(Request.Url + " ::[From]:: Unknown");
+
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

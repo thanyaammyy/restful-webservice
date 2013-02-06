@@ -113,10 +113,10 @@ namespace DataModelLib.Page
             if (userId == 0 || serviceId == 0) return false;
             using (var wdc = new WebserviceDataContext())
             {
-                var count = wdc.UserServices.Count(item => item.UserId==userId && item.ServiceId==serviceId);
+                var count = wdc.UserServices.Count(item => item.UserId==userId && item.ServiceId==serviceId && item.Status==1);
                 if (count != 0)
                 {
-                    var ips = wdc.UserServices.Single(item => item.UserId == userId && item.ServiceId == serviceId).Ips;
+                    var ips = wdc.UserServices.Single(item => item.UserId == userId && item.ServiceId == serviceId && item.Status==1).Ips;
                     if(ip.Contains(';'))
                     {
                         var strIp = ips.Split(';');
