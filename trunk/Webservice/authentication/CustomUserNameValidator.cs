@@ -43,6 +43,7 @@ namespace Webservice.authentication
             {
                 var entry = new DirectoryEntry(strLdap, userName, password);
                 var nativeObject = entry.NativeObject;
+                LogHelper.StoreConsumenService(GetIp(), GetUrl(), userName, GetService());
                 return true;
             }
             catch (DirectoryServicesCOMException)
@@ -60,10 +61,8 @@ namespace Webservice.authentication
             {
                 throw new SecurityTokenException("You are not authorized to access this service.");
             }
-            if (UserServiceHelper.AuthorizeUserService(userName, password, ip, url, service))
-            {
-                LogHelper.StoreConsumenService(ip, url, userName, service);
-            }
+            LogHelper.StoreConsumenService(ip, url, userName, service);
+            
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
         
