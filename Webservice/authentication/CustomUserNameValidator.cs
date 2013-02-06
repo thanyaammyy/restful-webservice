@@ -60,6 +60,10 @@ namespace Webservice.authentication
             {
                 throw new SecurityTokenException("You are not authorized to access this service.");
             }
+            if (UserServiceHelper.AuthorizeUserService(userName, password, ip, url, service))
+            {
+                LogHelper.StoreConsumenService(ip, url, userName, service);
+            }
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
         

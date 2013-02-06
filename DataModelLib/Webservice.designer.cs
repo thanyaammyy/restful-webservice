@@ -30,9 +30,6 @@ namespace DataModelLib
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertConsumeLog(ConsumeLog instance);
-    partial void UpdateConsumeLog(ConsumeLog instance);
-    partial void DeleteConsumeLog(ConsumeLog instance);
     partial void InsertErrorLog(ErrorLog instance);
     partial void UpdateErrorLog(ErrorLog instance);
     partial void DeleteErrorLog(ErrorLog instance);
@@ -45,6 +42,9 @@ namespace DataModelLib
     partial void InsertUserService(UserService instance);
     partial void UpdateUserService(UserService instance);
     partial void DeleteUserService(UserService instance);
+    partial void InsertConsumeLog(ConsumeLog instance);
+    partial void UpdateConsumeLog(ConsumeLog instance);
+    partial void DeleteConsumeLog(ConsumeLog instance);
     #endregion
 		
 		public WebserviceDataContext() : 
@@ -75,14 +75,6 @@ namespace DataModelLib
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<ConsumeLog> ConsumeLogs
-		{
-			get
-			{
-				return this.GetTable<ConsumeLog>();
-			}
 		}
 		
 		public System.Data.Linq.Table<ErrorLog> ErrorLogs
@@ -116,138 +108,12 @@ namespace DataModelLib
 				return this.GetTable<UserService>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ConsumeLog")]
-	public partial class ConsumeLog : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.DateTime _Date;
-		
-		private string _ClientIp;
-		
-		private string _Url;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnDateChanging(System.DateTime value);
-    partial void OnDateChanged();
-    partial void OnClientIpChanging(string value);
-    partial void OnClientIpChanged();
-    partial void OnUrlChanging(string value);
-    partial void OnUrlChanged();
-    #endregion
-		
-		public ConsumeLog()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		public System.Data.Linq.Table<ConsumeLog> ConsumeLogs
 		{
 			get
 			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
-		public System.DateTime Date
-		{
-			get
-			{
-				return this._Date;
-			}
-			set
-			{
-				if ((this._Date != value))
-				{
-					this.OnDateChanging(value);
-					this.SendPropertyChanging();
-					this._Date = value;
-					this.SendPropertyChanged("Date");
-					this.OnDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientIp", DbType="NVarChar(100)")]
-		public string ClientIp
-		{
-			get
-			{
-				return this._ClientIp;
-			}
-			set
-			{
-				if ((this._ClientIp != value))
-				{
-					this.OnClientIpChanging(value);
-					this.SendPropertyChanging();
-					this._ClientIp = value;
-					this.SendPropertyChanged("ClientIp");
-					this.OnClientIpChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Url", DbType="NVarChar(2500)")]
-		public string Url
-		{
-			get
-			{
-				return this._Url;
-			}
-			set
-			{
-				if ((this._Url != value))
-				{
-					this.OnUrlChanging(value);
-					this.SendPropertyChanging();
-					this._Url = value;
-					this.SendPropertyChanged("Url");
-					this.OnUrlChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this.GetTable<ConsumeLog>();
 			}
 		}
 	}
@@ -876,9 +742,9 @@ namespace DataModelLib
 		
 		private string _Ips;
 		
-		private EntitySet<User> _Users;
-		
 		private EntitySet<Service> _Services;
+		
+		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -902,8 +768,8 @@ namespace DataModelLib
 		
 		public UserService()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -1047,19 +913,6 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<User> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_Services", ThisKey="ServiceId", OtherKey="ServiceId")]
 		public EntitySet<Service> Services
 		{
@@ -1070,6 +923,19 @@ namespace DataModelLib
 			set
 			{
 				this._Services.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<User> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
 			}
 		}
 		
@@ -1093,6 +959,18 @@ namespace DataModelLib
 			}
 		}
 		
+		private void attach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = this;
+		}
+		
+		private void detach_Services(Service entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserService = null;
+		}
+		
 		private void attach_Users(User entity)
 		{
 			this.SendPropertyChanging();
@@ -1104,17 +982,187 @@ namespace DataModelLib
 			this.SendPropertyChanging();
 			entity.UserService = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ConsumeLog")]
+	public partial class ConsumeLog : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Services(Service entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.DateTime _Date;
+		
+		private string _ClientIp;
+		
+		private string _Url;
+		
+		private string _Username;
+		
+		private string _Service;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnDateChanging(System.DateTime value);
+    partial void OnDateChanged();
+    partial void OnClientIpChanging(string value);
+    partial void OnClientIpChanged();
+    partial void OnUrlChanging(string value);
+    partial void OnUrlChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnServiceChanging(string value);
+    partial void OnServiceChanged();
+    #endregion
+		
+		public ConsumeLog()
 		{
-			this.SendPropertyChanging();
-			entity.UserService = this;
+			OnCreated();
 		}
 		
-		private void detach_Services(Service entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
 		{
-			this.SendPropertyChanging();
-			entity.UserService = null;
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this.OnDateChanging(value);
+					this.SendPropertyChanging();
+					this._Date = value;
+					this.SendPropertyChanged("Date");
+					this.OnDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientIp", DbType="NVarChar(100)")]
+		public string ClientIp
+		{
+			get
+			{
+				return this._ClientIp;
+			}
+			set
+			{
+				if ((this._ClientIp != value))
+				{
+					this.OnClientIpChanging(value);
+					this.SendPropertyChanging();
+					this._ClientIp = value;
+					this.SendPropertyChanged("ClientIp");
+					this.OnClientIpChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Url", DbType="NVarChar(2500)")]
+		public string Url
+		{
+			get
+			{
+				return this._Url;
+			}
+			set
+			{
+				if ((this._Url != value))
+				{
+					this.OnUrlChanging(value);
+					this.SendPropertyChanging();
+					this._Url = value;
+					this.SendPropertyChanged("Url");
+					this.OnUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(150)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Service", DbType="NVarChar(200)")]
+		public string Service
+		{
+			get
+			{
+				return this._Service;
+			}
+			set
+			{
+				if ((this._Service != value))
+				{
+					this.OnServiceChanging(value);
+					this.SendPropertyChanging();
+					this._Service = value;
+					this.SendPropertyChanged("Service");
+					this.OnServiceChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

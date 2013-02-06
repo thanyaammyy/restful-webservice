@@ -40,7 +40,7 @@ namespace DataModelLib.Page
             }
         }
 
-        public static void StoreConsumenService(string Url)
+        public static void StoreConsumenService(string ip, string url, string username, string service)
         {
             try
             {
@@ -49,8 +49,10 @@ namespace DataModelLib.Page
                     wdc.ConsumeLogs.InsertOnSubmit(new ConsumeLog()
                     {
                         Date = DateTime.Now,
-                        ClientIp = HttpContext.Current.Request.UserHostAddress,
-                        Url = Url
+                        ClientIp = ip,
+                        Url = url,
+                        Username = username,
+                        Service = service
                     });
 
                     try
