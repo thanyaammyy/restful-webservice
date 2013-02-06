@@ -117,7 +117,7 @@ namespace DataModelLib.Page
                 if (count != 0)
                 {
                     var ips = wdc.UserServices.Single(item => item.UserId == userId && item.ServiceId == serviceId && item.Status==1).Ips;
-                    if(ip.Contains(';'))
+                    if(ips.Contains(';'))
                     {
                         var strIp = ips.Split(';');
                         foreach (var s in strIp)
@@ -139,5 +139,36 @@ namespace DataModelLib.Page
             }
             return isAuthorized;
         }
+
+        //public static int CountUserService(int userId, int serviceId)
+        //{
+        //    var wdc = new WebserviceDataContext();
+        //    return wdc.UserServices.Single(item => item.UserId == userId && item.ServiceId == serviceId && item.Status == 1).Id;
+        //}
+        //public static string UserFuckService(int usId, string ip)
+        //{
+        //    var wdc = new WebserviceDataContext();
+        //    var ips = wdc.UserServices.Single(item => item.Id == usId).Ips;
+        //    var str = ips;
+        //    if (ips.Contains(';'))
+        //    {
+        //        var strIp = ips.Split(';');
+        //        foreach (var s in strIp)
+        //        {
+        //            if (s.Equals(ip)) str += " true";
+        //            break;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (string.IsNullOrEmpty(ips))
+        //        {
+        //            return str += " true";
+        //        }
+        //        var cIp = ips.Remove(ips.Length - 1, 1);
+        //        if (cIp.Equals(ip)) str += " true";
+        //    }
+        //    return str;
+        //}
     }
 }
