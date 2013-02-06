@@ -68,8 +68,8 @@ namespace Webservice.authentication
         
         private string GetUrl()
         {
-            var oc = OperationContext.Current;
-            return oc.EndpointDispatcher.EndpointAddress.Uri.ToString();
+            var context = OperationContext.Current;
+            return context.IncomingMessageHeaders.To.PathAndQuery;
         }
 
         private string GetIp()
