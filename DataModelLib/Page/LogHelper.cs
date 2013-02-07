@@ -40,7 +40,7 @@ namespace DataModelLib.Page
             }
         }
 
-        public static void StoreConsumenService(string ip, string url, string username, string service)
+        public static void StoreConsumeService(string ip, string url, string username, string service)
         {
             try
             {
