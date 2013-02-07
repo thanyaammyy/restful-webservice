@@ -316,7 +316,7 @@ namespace DataModelLib
 		
 		private System.DateTime _UpdateDateTime;
 		
-		private EntityRef<UserService> _UserService;
+		private EntitySet<UserService> _UserServices;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -336,7 +336,7 @@ namespace DataModelLib
 		
 		public Service()
 		{
-			this._UserService = default(EntityRef<UserService>);
+			this._UserServices = new EntitySet<UserService>(new Action<UserService>(this.attach_UserServices), new Action<UserService>(this.detach_UserServices));
 			OnCreated();
 		}
 		
@@ -351,10 +351,6 @@ namespace DataModelLib
 			{
 				if ((this._ServiceId != value))
 				{
-					if (this._UserService.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnServiceIdChanging(value);
 					this.SendPropertyChanging();
 					this._ServiceId = value;
@@ -444,37 +440,16 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_UserService", ThisKey="ServiceId", OtherKey="ServiceId", IsForeignKey=true)]
-		public UserService UserService
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Service_UserService", Storage="_UserServices", ThisKey="ServiceId", OtherKey="ServiceId")]
+		public EntitySet<UserService> UserServices
 		{
 			get
 			{
-				return this._UserService.Entity;
+				return this._UserServices;
 			}
 			set
 			{
-				UserService previousValue = this._UserService.Entity;
-				if (((previousValue != value) 
-							|| (this._UserService.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserService.Entity = null;
-						previousValue.Services.Remove(this);
-					}
-					this._UserService.Entity = value;
-					if ((value != null))
-					{
-						value.Services.Add(this);
-						this._ServiceId = value.ServiceId;
-					}
-					else
-					{
-						this._ServiceId = default(int);
-					}
-					this.SendPropertyChanged("UserService");
-				}
+				this._UserServices.Assign(value);
 			}
 		}
 		
@@ -497,6 +472,18 @@ namespace DataModelLib
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_UserServices(UserService entity)
+		{
+			this.SendPropertyChanging();
+			entity.Service = this;
+		}
+		
+		private void detach_UserServices(UserService entity)
+		{
+			this.SendPropertyChanging();
+			entity.Service = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
@@ -517,7 +504,7 @@ namespace DataModelLib
 		
 		private System.DateTime _UpdateDateTime;
 		
-		private EntityRef<UserService> _UserService;
+		private EntitySet<UserService> _UserServices;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -539,7 +526,7 @@ namespace DataModelLib
 		
 		public User()
 		{
-			this._UserService = default(EntityRef<UserService>);
+			this._UserServices = new EntitySet<UserService>(new Action<UserService>(this.attach_UserServices), new Action<UserService>(this.detach_UserServices));
 			OnCreated();
 		}
 		
@@ -554,10 +541,6 @@ namespace DataModelLib
 			{
 				if ((this._UserId != value))
 				{
-					if (this._UserService.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnUserIdChanging(value);
 					this.SendPropertyChanging();
 					this._UserId = value;
@@ -667,37 +650,16 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_UserService", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
-		public UserService UserService
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserService", Storage="_UserServices", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<UserService> UserServices
 		{
 			get
 			{
-				return this._UserService.Entity;
+				return this._UserServices;
 			}
 			set
 			{
-				UserService previousValue = this._UserService.Entity;
-				if (((previousValue != value) 
-							|| (this._UserService.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserService.Entity = null;
-						previousValue.Users.Remove(this);
-					}
-					this._UserService.Entity = value;
-					if ((value != null))
-					{
-						value.Users.Add(this);
-						this._UserId = value.UserId;
-					}
-					else
-					{
-						this._UserId = default(int);
-					}
-					this.SendPropertyChanged("UserService");
-				}
+				this._UserServices.Assign(value);
 			}
 		}
 		
@@ -719,6 +681,18 @@ namespace DataModelLib
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_UserServices(UserService entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_UserServices(UserService entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
 		}
 	}
 	
@@ -742,9 +716,9 @@ namespace DataModelLib
 		
 		private string _Ips;
 		
-		private EntitySet<Service> _Services;
+		private EntityRef<User> _User;
 		
-		private EntitySet<User> _Users;
+		private EntityRef<Service> _Service;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -768,8 +742,8 @@ namespace DataModelLib
 		
 		public UserService()
 		{
-			this._Services = new EntitySet<Service>(new Action<Service>(this.attach_Services), new Action<Service>(this.detach_Services));
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._User = default(EntityRef<User>);
+			this._Service = default(EntityRef<Service>);
 			OnCreated();
 		}
 		
@@ -804,6 +778,10 @@ namespace DataModelLib
 			{
 				if ((this._UserId != value))
 				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnUserIdChanging(value);
 					this.SendPropertyChanging();
 					this._UserId = value;
@@ -824,6 +802,10 @@ namespace DataModelLib
 			{
 				if ((this._ServiceId != value))
 				{
+					if (this._Service.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnServiceIdChanging(value);
 					this.SendPropertyChanging();
 					this._ServiceId = value;
@@ -913,29 +895,71 @@ namespace DataModelLib
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_Service", Storage="_Services", ThisKey="ServiceId", OtherKey="ServiceId")]
-		public EntitySet<Service> Services
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_UserService", Storage="_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public User User
 		{
 			get
 			{
-				return this._Services;
+				return this._User.Entity;
 			}
 			set
 			{
-				this._Services.Assign(value);
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.UserServices.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.UserServices.Add(this);
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserService_User", Storage="_Users", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<User> Users
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Service_UserService", Storage="_Service", ThisKey="ServiceId", OtherKey="ServiceId", IsForeignKey=true)]
+		public Service Service
 		{
 			get
 			{
-				return this._Users;
+				return this._Service.Entity;
 			}
 			set
 			{
-				this._Users.Assign(value);
+				Service previousValue = this._Service.Entity;
+				if (((previousValue != value) 
+							|| (this._Service.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Service.Entity = null;
+						previousValue.UserServices.Remove(this);
+					}
+					this._Service.Entity = value;
+					if ((value != null))
+					{
+						value.UserServices.Add(this);
+						this._ServiceId = value.ServiceId;
+					}
+					else
+					{
+						this._ServiceId = default(int);
+					}
+					this.SendPropertyChanged("Service");
+				}
 			}
 		}
 		
@@ -957,30 +981,6 @@ namespace DataModelLib
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = this;
-		}
-		
-		private void detach_Services(Service entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = null;
-		}
-		
-		private void attach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = this;
-		}
-		
-		private void detach_Users(User entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserService = null;
 		}
 	}
 	
