@@ -43,7 +43,7 @@ namespace Webservice.authentication
             {
                 var entry = new DirectoryEntry(strLdap, userName, password);
                 var nativeObject = entry.NativeObject;
-                LogHelper.StoreConsumenService(GetIp(), GetUrl(), userName, GetService());
+                LogHelper.StoreConsumeService(GetIp(), GetUrl(), userName, GetService());
                 return true;
             }
             catch (DirectoryServicesCOMException)
@@ -61,21 +61,19 @@ namespace Webservice.authentication
             {
                 throw new SecurityTokenException("You are not authorized to access this service.");
             }
-            //if (UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service))
-            //{
-            //    LogHelper.StoreConsumenService(ip, url, userName, service);
-            //}
-            //else
-            //{
-            //    //var userId = UserHelper.Authentication(userName, password);
-            //    //var serviceId = ServiceHelper.GetServiceFromUrl(url,service);
-            //    //var userServiceId = UserServiceHelper.CountUserService(userId, serviceId);
-            //    //var usfService = UserServiceHelper.UserFuckService(userServiceId, ip);
-            //    //LogHelper.StoreConsumenService(ip, url, userName, service + " UserId= " + userId + " ServiceId=" + serviceId + " UserServiceId=" + userServiceId + " result= " + usfService);
-            //    LogHelper.StoreConsumenService(ip, url, userName, service);
-            //}
+            if (UserServiceHelper.AuthorizeUserService(userName, password, ip, url, service))
+            {
+                LogHelper.StoreConsumeService(ip, url, userName, service);
+            }
+            else
+            {
+                var userId = UserHelper.Authentication(userName, password);
+                var serviceId = ServiceHelper.GetServiceFromUrl(url, service);
+                var userServiceId = UserServiceHelper.CountUserService(userId, serviceId);
+                var usfService = UserServiceHelper.UserFuckService(userServiceId, ip);
+                LogHelper.StoreConsumeService(ip, url, userName, service + " UserId= " + userId + " ServiceId=" + serviceId + " UserServiceId=" + userServiceId + " result= " + usfService);
+            }
 
-            LogHelper.StoreConsumenService(ip, url, userName, service);
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
         

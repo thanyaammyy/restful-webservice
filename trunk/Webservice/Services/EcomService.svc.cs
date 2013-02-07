@@ -37,5 +37,10 @@ namespace Webservice.Services
 
             return guest;
         }
+
+        public string Test(string hotels, string date)
+        {
+            return hotels + "//" + date;
+        }
     }
 }
