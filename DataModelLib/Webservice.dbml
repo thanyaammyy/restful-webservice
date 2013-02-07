@@ -17,7 +17,7 @@
       <Column Name="ServiceURL" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
       <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="UserService_Service" Member="UserService" ThisKey="ServiceId" OtherKey="ServiceId" Type="UserService" IsForeignKey="true" />
+      <Association Name="Service_UserService" Member="UserServices" ThisKey="ServiceId" OtherKey="ServiceId" Type="UserService" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
@@ -28,7 +28,7 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="UserService_User" Member="UserService" ThisKey="UserId" OtherKey="UserId" Type="UserService" IsForeignKey="true" />
+      <Association Name="User_UserService" Member="UserServices" ThisKey="UserId" OtherKey="UserId" Type="UserService" />
     </Type>
   </Table>
   <Table Name="dbo.UserService" Member="UserServices">
@@ -40,8 +40,8 @@
       <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Ips" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="UserService_Service" Member="Services" ThisKey="ServiceId" OtherKey="ServiceId" Type="Service" />
-      <Association Name="UserService_User" Member="Users" ThisKey="UserId" OtherKey="UserId" Type="User" />
+      <Association Name="User_UserService" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="Service_UserService" Member="Service" ThisKey="ServiceId" OtherKey="ServiceId" Type="Service" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ConsumeLog" Member="ConsumeLogs">
