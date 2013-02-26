@@ -120,10 +120,9 @@ namespace DataModelLib.Page
                     if(ips.Contains(';'))
                     {
                         var strIp = ips.Split(';');
-                        foreach (var s in strIp)
+                        if (strIp.Any(s => s.Equals(ip)))
                         {
-                            if (s.Equals(ip)) isAuthorized = true;
-                            break;
+                            isAuthorized = true;
                         }
                     }
                     else
@@ -152,10 +151,9 @@ namespace DataModelLib.Page
             if (ips.Contains(';'))
             {
                 var strIp = ips.Split(';');
-                foreach (var s in strIp)
+                if (strIp.Any(s => s.Equals(ip)))
                 {
-                    if (s.Equals(ip)) str += " true";
-                    break;
+                    str += " true";
                 }
             }
             else
