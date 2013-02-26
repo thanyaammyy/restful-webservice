@@ -38,7 +38,7 @@ namespace DataModelLib.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.1.201.141\\ITSQL;Initial Catalog=WebService;Persist Security Info=T" +
-            "rue;User ID=webservice;Password=P@ssword")]
+            "rue;User ID=sa;Password=sa@onyx#sqlsa10")]
         public string WebServiceConnectionString {
             get {
                 return ((string)(this["WebServiceConnectionString"]));
