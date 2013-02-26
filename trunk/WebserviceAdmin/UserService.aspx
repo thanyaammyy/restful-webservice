@@ -16,6 +16,7 @@
 
         function validateIp(value, column) {
             var pattern = /\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/;
+            
             if (value.indexOf(';') !== -1) {
                 var ips = value.split(';');
                 for (var i = 0; i < ips.length; i++) {
@@ -26,7 +27,9 @@
                 }
                 return [true, ""];
             }
-            else {
+            else if (value == "") {
+                return [true, ""];
+            } else {
                 if (pattern.test(value))
                     return [true, ""];
                 else

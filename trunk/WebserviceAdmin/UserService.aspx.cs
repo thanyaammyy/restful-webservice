@@ -55,7 +55,7 @@ namespace WebserviceAdmin
             var status = e.RowData["StatusLabel"];
             var admin = Session["UserSession"].ToString();
             var id = e.RowKey;
-            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(service)))
+            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(service)))
             {
 
                 var userService = new DataModelLib.UserService()
