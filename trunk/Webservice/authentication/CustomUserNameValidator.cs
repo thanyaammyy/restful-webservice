@@ -57,13 +57,14 @@ namespace Webservice.authentication
             var ip = GetIp();
             var url = GetUrl();
             var service = GetService();
+            var fullUrl = GetFullUrl();
             if(string.IsNullOrEmpty(ip)||string.IsNullOrEmpty(url))
             {
                 throw new SecurityTokenException("You are not authorized to access this service.");
             }
             if (UserServiceHelper.AuthorizeUserService(userName, password, ip, url, service))
             {
-                LogHelper.StoreConsumeService(ip, url, userName, service);
+                LogHelper.StoreConsumeService(ip, fullUrl, userName, service);
             }
             else
             {
@@ -71,12 +72,19 @@ namespace Webservice.authentication
                 var serviceId = ServiceHelper.GetServiceFromUrl(url, service);
                 var userServiceId = UserServiceHelper.CountUserService(userId, serviceId);
                 var usfService = UserServiceHelper.UserFuckService(userServiceId, ip);
-                LogHelper.StoreConsumeService(ip, url, userName, service + " UserId= " + userId + " ServiceId=" + serviceId + " UserServiceId=" + userServiceId + " result= " + usfService);
+                LogHelper.StoreConsumeService(ip, fullUrl, userName, service + " UserId= " + userId + " ServiceId=" + serviceId + " UserServiceId=" + userServiceId + " result= " + usfService);
             }
 
             return UserServiceHelper.AuthorizeUserService(userName, password,ip,url,service);
         }
-        
+
+        private string GetFullUrl()
+        {
+            var props = OperationContext.Current.IncomingMessageProperties;
+            var via = props.Via;
+            return GetUrl() +"/"+via.Segments[3].ToString()+ via.Segments[4].ToString() + via.Segments[5].ToString();
+        }
+
         private string GetUrl()
         {
             var oc = OperationContext.Current;
