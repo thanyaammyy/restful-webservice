@@ -18,7 +18,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="headerMenuLabel">
-        Service</div>
+        Services</div>
     <asp:UpdatePanel ID="updatepanel1" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
             <cc1:JQGrid ID="JqgridService" AutoWidth="True" runat="server" Height="80%" OnRowAdding="JqgridService_RowAdding"

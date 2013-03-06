@@ -22,6 +22,7 @@ namespace DataModelLib.Page
                                        Id = userService.Id,
                                        Username = user.Username,
                                        ServiceName = service.ServiceName,
+                                       Description = service.Description,
                                        ServiceUrl = service.ServiceURL,
                                        Status = userService.Status,
                                        Ips = userService.Ips
