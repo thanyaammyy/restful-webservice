@@ -43,7 +43,7 @@ namespace Webservice.authentication
             {
                 var entry = new DirectoryEntry(strLdap, userName, password);
                 var nativeObject = entry.NativeObject;
-                LogHelper.StoreConsumeService(GetIp(), GetUrl(), userName, GetService());
+                LogHelper.StoreConsumeService(GetIp(), GetFullUrl(), userName, GetService());
                 return true;
             }
             catch (DirectoryServicesCOMException)
