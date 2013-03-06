@@ -28,11 +28,11 @@ namespace WebserviceAdmin
         protected void JqgridUserService_RowAdding(object sender, Trirand.Web.UI.WebControls.JQGridRowAddEventArgs e)
         {
             var user = e.RowData["Username"];
-            var service = e.RowData["ServiceName"];
+            var service = e.RowData["Description"];
             var ips = e.RowData["Ips"];
             var status = e.RowData["StatusLabel"];
             var admin = Session["UserSession"].ToString();
-            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(ips) || string.IsNullOrEmpty(service)))
+            if (!(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(status) || string.IsNullOrEmpty(service)))
             {
 
                 var userService = new DataModelLib.UserService()
@@ -50,7 +50,7 @@ namespace WebserviceAdmin
         protected void JqgridUserService_RowEditing(object sender, Trirand.Web.UI.WebControls.JQGridRowEditEventArgs e)
         {
             var user = e.RowData["Username"];
-            var service = e.RowData["ServiceName"];
+            var service = e.RowData["Description"];
             var ips = e.RowData["Ips"];
             var status = e.RowData["StatusLabel"];
             var admin = Session["UserSession"].ToString();

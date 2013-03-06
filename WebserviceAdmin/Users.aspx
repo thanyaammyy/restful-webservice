@@ -36,7 +36,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="headerMenuLabel">
-        User</div>
+        Users</div>
     <asp:UpdatePanel ID="updatepanel1" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
             <cc1:JQGrid ID="JqgridUser" AutoWidth="True" runat="server" Height="80%" OnRowAdding="JqgridUser_RowAdding"

@@ -99,6 +99,7 @@
     <Content Include="Styles\main.css" />
     <Content Include="Styles\ui.jqgrid.css" />
     <Content Include="Users.aspx" />
+    <Content Include="Utility.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -169,6 +170,13 @@
     </Compile>
     <Compile Include="Users.aspx.designer.cs">
       <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility.aspx.cs">
+      <DependentUpon>Utility.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Utility.aspx.designer.cs">
+      <DependentUpon>Utility.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

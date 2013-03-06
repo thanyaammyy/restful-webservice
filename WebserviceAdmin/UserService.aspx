@@ -40,7 +40,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="headerMenuLabel">
-        Property</div>
+        User Service</div>
     <asp:UpdatePanel ID="updatepanel1" UpdateMode="Conditional" runat="server">
         <ContentTemplate>
              <asp:DropDownList ID="ddlUser" ToolTip="User is required." DataSourceID="UserDataSource"
@@ -50,7 +50,7 @@
                 SelectMethod="ListUser" TypeName="DataModelLib.Page.UserHelper" runat="server">
             </asp:ObjectDataSource>
             <asp:DropDownList ID="ddlService" ToolTip="Service is required." DataSourceID="ServiceDataSource"
-                DataValueField="ServiceId" DataTextField="ServiceName" Width="90" runat="server">
+                DataValueField="ServiceId" DataTextField="Description" Width="90" runat="server">
             </asp:DropDownList>
             <asp:ObjectDataSource ID="ServiceDataSource" DataObjectTypeName="DataModelLib.Service"
                 SelectMethod="ListService" TypeName="DataModelLib.Page.ServiceHelper" runat="server">
@@ -66,7 +66,9 @@
                             <cc1:RequiredValidator />
                         </EditClientSideValidators>
                     </cc1:JQGridColumn>
-                    <cc1:JQGridColumn HeaderText="Service Name" DataField="ServiceName" Editable="True"
+                    <cc1:JQGridColumn HeaderText="Service Name" DataField="ServiceName" Editable="False" TextAlign="Left">
+                    </cc1:JQGridColumn>
+                    <cc1:JQGridColumn HeaderText="Service Description" DataField="Description" Editable="True"
                         EditType="DropDown" EditorControlID="ddlService" TextAlign="Left">
                         <EditClientSideValidators>
                             <cc1:RequiredValidator />
@@ -89,9 +91,9 @@
                 <AppearanceSettings ShowRowNumbers="true" HighlightRowsOnHover="True" />
                 <PagerSettings PageSize="20" />
                 <DeleteDialogSettings LeftOffset="497" TopOffset="241"></DeleteDialogSettings>
-                <AddDialogSettings Width="300" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
+                <AddDialogSettings Width="460" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
                     CloseAfterAdding="True" Caption="Add User Service" ClearAfterAdding="True"></AddDialogSettings>
-                <EditDialogSettings Width="300" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
+                <EditDialogSettings Width="460" Modal="True" TopOffset="250" LeftOffset="500" Height="300"
                     CloseAfterEditing="True" Caption="Edit User Service"></EditDialogSettings>
                 <ClientSideEvents RowDoubleClick="editRow" />
             </cc1:JQGrid>
