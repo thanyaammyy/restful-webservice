@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WebService" Class="WebserviceDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=SHQDSPS1\ONCOMOSQL;Initial Catalog=WebService;Persist Security Info=True;User ID=webservice" SettingsObjectName="DataModelLib.Properties.Settings" SettingsPropertyName="WebServiceConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.1.201.141\ITSQL;Initial Catalog=WebService;Persist Security Info=True;User ID=sa" SettingsObjectName="DataModelLib.Properties.Settings" SettingsPropertyName="WebServiceConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.ErrorLog" Member="ErrorLogs">
     <Type Name="ErrorLog">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -8,16 +8,6 @@
       <Column Name="Detail" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ClientIp" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="Url" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Service" Member="Services">
-    <Type Name="Service">
-      <Column Name="ServiceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ServiceName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ServiceURL" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Service_UserService" Member="UserServices" ThisKey="ServiceId" OtherKey="ServiceId" Type="UserService" />
     </Type>
   </Table>
   <Table Name="dbo.[User]" Member="Users">
@@ -52,6 +42,17 @@
       <Column Name="Url" Type="System.String" DbType="NVarChar(2500)" CanBeNull="true" />
       <Column Name="Username" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="Service" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Service" Member="Services">
+    <Type Name="Service">
+      <Column Name="ServiceId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ServiceURL" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateUser" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UpdateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Service_UserService" Member="UserServices" ThisKey="ServiceId" OtherKey="ServiceId" Type="UserService" />
     </Type>
   </Table>
 </Database>

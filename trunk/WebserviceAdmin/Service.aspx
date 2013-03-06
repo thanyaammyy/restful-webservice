@@ -37,6 +37,11 @@
                             <cc1:RequiredValidator />
                         </EditClientSideValidators>
                     </cc1:JQGridColumn>
+                    <cc1:JQGridColumn HeaderText="Description" DataField="Description" Editable="True" TextAlign="Left">
+                        <EditClientSideValidators>
+                            <cc1:RequiredValidator />
+                        </EditClientSideValidators>
+                    </cc1:JQGridColumn>
                 </Columns>
                 <AddDialogSettings CloseAfterAdding="True" />
                 <EditDialogSettings CloseAfterEditing="True" />

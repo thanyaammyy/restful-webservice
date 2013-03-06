@@ -23,7 +23,8 @@ namespace DataModelLib.Page
                     ServiceURL = service.ServiceURL,
                     ServiceName = service.ServiceName,
                     UpdateUser = service.UpdateUser,
-                    UpdateDateTime = DateTime.Now
+                    UpdateDateTime = DateTime.Now,
+                    Description = service.Description
                 });
 
                 try
@@ -50,6 +51,7 @@ namespace DataModelLib.Page
                 s.ServiceURL = service.ServiceURL;
                 s.UpdateUser = service.UpdateUser;
                 s.UpdateDateTime = DateTime.Now;
+                s.Description = service.Description;
 
                 try
                 {
