@@ -22,7 +22,7 @@ namespace DataModelLib.Page
             if(checkOutDate.ToLower().Equals("any"))
             {
                guest = (from tbdat in mdc.TBDATs
-                        where tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;"
+                        where tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;" && tbdat.EMAIL != ""
                            orderby tbdat.PROPERTYCODE , tbdat.GUESTFIRSTNAME , tbdat.GUESTLASTNAME
                            select new Medallia()
                                         {
@@ -39,7 +39,7 @@ namespace DataModelLib.Page
                 var tick = Convert.ToInt64(checkOutDate);
                 var coDate = new DateTime(tick);
                 guest = (from tbdat in mdc.TBDATs
-                         where tbdat.CHECKOUTDATE == coDate && tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;"
+                         where tbdat.CHECKOUTDATE == coDate && tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;" && tbdat.EMAIL != ""
                             orderby tbdat.PROPERTYCODE , tbdat.GUESTFIRSTNAME , tbdat.GUESTLASTNAME
                             select new Medallia()
                                         {
@@ -66,7 +66,7 @@ namespace DataModelLib.Page
             if(checkOutDate.ToLower().Equals("any"))
             {
                 guest = (from tbData in mdc.TBDATs
-                         where tbData.EMAIL != "&nbsp;"
+                         where tbData.EMAIL != "&nbsp;"&& tbData.EMAIL != ""
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
                          select new Medallia()
                                         {
@@ -83,7 +83,7 @@ namespace DataModelLib.Page
                 var tick = Convert.ToInt64(checkOutDate);
                 var coDate = new DateTime(tick);
                 guest = (from tbData in mdc.TBDATs
-                         where tbData.CHECKOUTDATE == coDate && tbData.EMAIL != "&nbsp;"
+                         where tbData.CHECKOUTDATE == coDate && tbData.EMAIL != "&nbsp;" && tbData.EMAIL != ""
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
                          select new Medallia()
                          {
