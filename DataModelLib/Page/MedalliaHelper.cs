@@ -22,7 +22,7 @@ namespace DataModelLib.Page
             if(checkOutDate.ToLower().Equals("any"))
             {
                guest = (from tbdat in mdc.TBDATs
-                           where tbdat.PROPERTYCODE == propertyCode
+                        where tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;"
                            orderby tbdat.PROPERTYCODE , tbdat.GUESTFIRSTNAME , tbdat.GUESTLASTNAME
                            select new Medallia()
                                         {
@@ -30,7 +30,8 @@ namespace DataModelLib.Page
                                             GuestFirstName = tbdat.GUESTFIRSTNAME,
                                             GuestLastName = tbdat.GUESTLASTNAME,
                                             PropertyCode = tbdat.PROPERTYCODE,
-                                            Country = tbdat.COUNTRY
+                                            Country = tbdat.COUNTRY,
+                                            RateCode = tbdat.RATECODE
                                         }).ToList();
             }
             else
@@ -38,7 +39,7 @@ namespace DataModelLib.Page
                 var tick = Convert.ToInt64(checkOutDate);
                 var coDate = new DateTime(tick);
                 guest = (from tbdat in mdc.TBDATs
-                            where tbdat.CHECKOUTDATE == coDate && tbdat.PROPERTYCODE == propertyCode
+                         where tbdat.CHECKOUTDATE == coDate && tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;"
                             orderby tbdat.PROPERTYCODE , tbdat.GUESTFIRSTNAME , tbdat.GUESTLASTNAME
                             select new Medallia()
                                         {
@@ -46,7 +47,8 @@ namespace DataModelLib.Page
                                             GuestFirstName = tbdat.GUESTFIRSTNAME,
                                             GuestLastName = tbdat.GUESTLASTNAME,
                                             PropertyCode = tbdat.PROPERTYCODE,
-                                            Country = tbdat.COUNTRY
+                                            Country = tbdat.COUNTRY,
+                                            RateCode = tbdat.RATECODE
                                         }).ToList();
             }
 
@@ -64,6 +66,7 @@ namespace DataModelLib.Page
             if(checkOutDate.ToLower().Equals("any"))
             {
                 guest = (from tbData in mdc.TBDATs
+                         where tbData.EMAIL != "&nbsp;"
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
                          select new Medallia()
                                         {
@@ -71,7 +74,8 @@ namespace DataModelLib.Page
                                             GuestFirstName = tbData.GUESTFIRSTNAME,
                                             GuestLastName = tbData.GUESTLASTNAME,
                                             PropertyCode = tbData.PROPERTYCODE,
-                                            Country = tbData.COUNTRY
+                                            Country = tbData.COUNTRY,
+                                            RateCode = tbData.RATECODE
                                         }).ToList();
             }
             else
@@ -79,7 +83,7 @@ namespace DataModelLib.Page
                 var tick = Convert.ToInt64(checkOutDate);
                 var coDate = new DateTime(tick);
                 guest = (from tbData in mdc.TBDATs
-                         where tbData.CHECKOUTDATE == coDate
+                         where tbData.CHECKOUTDATE == coDate && tbData.EMAIL != "&nbsp;"
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
                          select new Medallia()
                          {
@@ -87,7 +91,8 @@ namespace DataModelLib.Page
                              GuestFirstName = tbData.GUESTFIRSTNAME,
                              GuestLastName = tbData.GUESTLASTNAME,
                              PropertyCode = tbData.PROPERTYCODE,
-                             Country = tbData.COUNTRY
+                             Country = tbData.COUNTRY,
+                             RateCode = tbData.RATECODE
                          }).ToList();
             }
             return guest;
