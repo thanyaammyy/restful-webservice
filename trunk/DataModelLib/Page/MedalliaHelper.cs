@@ -36,10 +36,10 @@ namespace DataModelLib.Page
             }
             else
             {
-                var tick = Convert.ToInt64(checkOutDate);
-                var coDate = new DateTime(tick);
+                var datetime = checkOutDate + " 00:00:00.000";
+                var dt = Convert.ToDateTime(datetime);
                 guest = (from tbdat in mdc.TBDATs
-                         where tbdat.CHECKOUTDATE == coDate && tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;" && tbdat.EMAIL != ""
+                         where tbdat.CHECKOUTDATE == dt && tbdat.PROPERTYCODE == propertyCode && tbdat.EMAIL != "&nbsp;" && tbdat.EMAIL != ""
                             orderby tbdat.PROPERTYCODE , tbdat.GUESTFIRSTNAME , tbdat.GUESTLASTNAME
                             select new Medallia()
                                         {
@@ -80,10 +80,10 @@ namespace DataModelLib.Page
             }
             else
             {
-                var tick = Convert.ToInt64(checkOutDate);
-                var coDate = new DateTime(tick);
+                var datetime = checkOutDate + " 00:00:00.000";
+                var dt = Convert.ToDateTime(datetime);
                 guest = (from tbData in mdc.TBDATs
-                         where tbData.CHECKOUTDATE == coDate && tbData.EMAIL != "&nbsp;" && tbData.EMAIL != ""
+                         where tbData.CHECKOUTDATE == dt && tbData.EMAIL != "&nbsp;" && tbData.EMAIL != ""
                          orderby tbData.PROPERTYCODE, tbData.GUESTFIRSTNAME, tbData.GUESTLASTNAME
                          select new Medallia()
                          {
