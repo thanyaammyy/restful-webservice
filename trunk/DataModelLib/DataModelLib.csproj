@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Helper\Encryption.cs" />
     <Compile Include="Helper\Medallia.cs" />
+    <Compile Include="Helper\Medallias.cs" />
     <Compile Include="Helper\UserService.cs" />
     <Compile Include="Medallia.designer.cs">
       <AutoGen>True</AutoGen>
