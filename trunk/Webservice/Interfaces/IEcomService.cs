@@ -19,7 +19,7 @@ namespace Webservice.Interfaces
     public interface IEcomService
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "GetGuest/{hotels}/{checkOutDate}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GetGuest/{hotels}/{checkOutDate}")]
         List<Medallia> GetGuest(string hotels, string checkOutDate);
 
         //[OperationContract]
