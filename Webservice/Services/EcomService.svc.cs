@@ -18,20 +18,20 @@ namespace Webservice.Services
         /// <summary>
         /// Retrieve a list of email address from guest who is currently checked out
         /// </summary>
-        public List<DataModelLib.Helper.Medallia> GetGuest(string hotels, string checkOutDate)
+        public Medallias GetGuest(string hotels, string checkOutDate)
         {
-            var guest = new List<Medallia>();
+            var guest = new Medallias();
             if (string.IsNullOrEmpty(hotels) || string.IsNullOrEmpty(checkOutDate)) return guest;
             var propCode = hotels.Split(',');
             if (propCode[0].ToLower().Equals("all"))
             {
-                guest.AddRange(MedalliaHelper.GetGuest(checkOutDate));
+                guest.Items.AddRange(MedalliaHelper.GetGuest(checkOutDate));
             }
             else
             {
                 foreach (var t in propCode)
                 {
-                    guest.AddRange(MedalliaHelper.GetGuestByPropCode(t, checkOutDate));
+                    guest.Items.AddRange(MedalliaHelper.GetGuestByPropCode(t, checkOutDate));
                 }
             }
 

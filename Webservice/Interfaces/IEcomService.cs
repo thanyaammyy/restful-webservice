@@ -20,7 +20,7 @@ namespace Webservice.Interfaces
     {
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GetGuest/{hotels}/{checkOutDate}")]
-        List<Medallia> GetGuest(string hotels, string checkOutDate);
+        Medallias GetGuest(string hotels, string checkOutDate);
 
         //[OperationContract]
         //[WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped, UriTemplate = "Test/{hotels}/{date}")]
